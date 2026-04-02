@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(**)",
+      "Grep(**)",
+      "Glob(**)"
+    ],
+    "deny": [
+      "Bash(rm -rf*)",
+      "Bash(sudo *)",
+      "Bash(curl * | bash*)",
+      "Bash(wget * | sh*)",
+      "Bash(* --force*)",
+      "Bash(chmod 777*)"
+    ]
+  }
+}
