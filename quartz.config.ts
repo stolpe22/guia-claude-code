@@ -13,7 +13,7 @@ const config: QuartzConfig = {
     enablePopovers: true,
     analytics: null,
     locale: "pt-BR",
-    // baseUrl: "seudominio.com", // descomente para deploy
+    baseUrl: "stolpe22.github.io/guia-claude-code",
     ignorePatterns: ["private", "templates", ".obsidian", "copilot-codex"],
     defaultDateType: "modified",
     generateSocialImages: false,
