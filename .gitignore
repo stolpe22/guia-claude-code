@@ -1,1 +1,24 @@
+# Obsidian
 .obsidian
+
+# Node
+node_modules/
+npm-debug.log*
+
+# Quartz build output
+public/
+
+# TypeScript
+*.tsbuildinfo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+
+# Env
+.env
+.env.local

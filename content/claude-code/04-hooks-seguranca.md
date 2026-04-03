@@ -1,6 +1,11 @@
+---
+title: "04 🔒 Hooks de Segurança"
+tags: [claude-code, hooks, seguranca, bash, guard-rails, pre-tool-use, banco-de-dados]
+---
+
 # FASE 4: Scripts de Segurança Ativa (Hooks)
 
-[← Anterior: Subagentes](./03-frota-subagentes.md) · [Índice](./README.md) · [Próxima: Orquestração →](./05-orquestracao-pratica.md)
+[[03-frota-subagentes|← Anterior: Subagentes]] · [[README|Índice]] · [[05-orquestracao-pratica|Próxima: Orquestração →]]
 
 ---
 
@@ -30,7 +35,7 @@ Agente tenta rodar comando Bash
 
 ## O Script de Validação
 
-> [📋 Copiar arquivo](./arquivos/validate-readonly-query.sh)
+> Copie de `arquivos/validate-readonly-query.sh` no repositório
 
 Crie em `scripts/validate-readonly-query.sh`:
 
@@ -127,8 +132,8 @@ Os hooks da Fase 4 mostram configuração inline no YAML do agente. Mas a forma 
 
 Isso aplica o hook a **todos os agentes** do projeto, não só ao `db-reader`.
 
-> Veja a [Fase 6](./06-settings-permissoes.md) para configuração completa do `settings.json` e a [Fase 7](./07-hooks-avancados.md) para os outros 4 tipos de hook além do `PreToolUse`.
+> Veja a [[06-settings-permissoes|Fase 6]] para configuração completa do `settings.json` e a [[07-hooks-avancados|Fase 7]] para os outros 4 tipos de hook além do `PreToolUse`.
 
 ---
 
-[← Anterior: Subagentes](./03-frota-subagentes.md) · [Índice](./README.md) · [Próxima: Orquestração →](./05-orquestracao-pratica.md)
+[[03-frota-subagentes|← Anterior: Subagentes]] · [[README|Índice]] · [[05-orquestracao-pratica|Próxima: Orquestração →]]

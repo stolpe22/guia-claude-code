@@ -1,5 +1,5 @@
 ---
-description: Cria um ADR (Architecture Decision Record). Use: /adr <título da decisão>
+description: "Cria um ADR (Architecture Decision Record). Use: /adr <título da decisão>"
 ---
 
 Crie um ADR para a decisão: $ARGUMENTS

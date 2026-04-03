@@ -1,3 +1,9 @@
+---
+title: "SDD Guide — Spec-Driven Development com IA"
+tags: [sdd, ia, claude-code, copilot, indice, fundamentos, engenharia]
+aliases: [sdd-guide, indice-principal]
+---
+
 # 🧠 SDD Guide — Spec-Driven Development com IA
 
 > Guias práticos para desenvolvimento seguro e orquestrado com agentes de IA.
@@ -15,11 +21,11 @@ Contém dois guias práticos (um para cada ecossistema) e a base teórica por tr
 
 ## 📚 Conteúdo
 
-| Pasta | Ferramenta | Descrição |
-|---|---|---|
-| [`conceitos/`](./conceitos/fundamentos.md) | — | Teoria: os 3 níveis de dev com IA, mindset shift, guard rails |
-| [`claude-code/`](./claude-code/README.md) | Anthropic Claude Code | Guia completo: Dev Container + firewall + subagentes + hooks |
-| [`copilot-codex/`](./copilot-codex/README.md) | GitHub Copilot / OpenAI Codex | Guia completo: Custom Agents + Skills + Hooks + cloud agents |
+| Pasta                       | Ferramenta                    | Descrição                                                     |
+| --------------------------- | ----------------------------- | ------------------------------------------------------------- |
+| [[fundamentos\|conceitos/]] | —                             | Teoria: os 3 níveis de dev com IA, mindset shift, guard rails |
+| [[README\|claude-code/]]    | Anthropic Claude Code         | Guia completo: Dev Container + firewall + subagentes + hooks  |
+| `copilot-codex/`            | GitHub Copilot / OpenAI Codex | Guia completo: Custom Agents + Skills + Hooks + cloud agents  |
 
 ---
 
@@ -45,22 +51,22 @@ Contém dois guias práticos (um para cada ecossistema) e a base teórica por tr
 
 ## 🔀 Comparativo Rápido
 
-| Conceito | Claude Code | Copilot / Codex |
-|---|---|---|
-| Instruções do projeto | `CLAUDE.md` (4 camadas + @imports) | `.github/copilot-instructions.md` + `AGENTS.md` |
-| Subagentes | `.claude/agents/*.md` | `.github/agents/*.agent.md` |
-| Skills / Slash commands | `.claude/skills/*.md` → `/comando` | `.github/skills/*/SKILL.md` |
-| Configuração central | `.claude/settings.json` | `.github/hooks/hooks.json` |
-| Hooks | 5 tipos: Pre/PostToolUse, UserPromptSubmit, Notification, Stop | PreToolUse e PostToolUse |
-| Permissões | `permissions.allow/deny` no settings.json | Apenas `tools` (lista positiva) |
-| Bloqueio em hooks | `exit 2` | JSON `{"permissionDecision":"deny"}` |
-| Memória persistente | `memory: project` ou `memory: user` (nativo) | Não tem nativo (usar MCP) |
-| Cloud agent | Não (só local) | Sim (aba Agents no GitHub.com) |
-| CI/CD não-interativo | `claude -p "prompt"` + `--output-format json` | Codex CLI com `--non-interactive` |
-| Sessões persistentes | `--resume <session-id>` | Não tem |
-| Firewall nativo | Sim (`init-firewall.sh`) | Sandbox automático no GitHub.com |
-| Modelos | Sonnet, Opus, Haiku | GPT-4o, o3, Claude, Gemini etc. |
-| MCP | `settings.json` (global ou por projeto) | YAML no agente ou config do repo |
+| Conceito                | Claude Code                                                    | Copilot / Codex                                 |
+| ----------------------- | -------------------------------------------------------------- | ----------------------------------------------- |
+| Instruções do projeto   | `CLAUDE.md` (4 camadas + @imports)                             | `.github/copilot-instructions.md` + `AGENTS.md` |
+| Subagentes              | `.claude/agents/*.md`                                          | `.github/agents/*.agent.md`                     |
+| Skills / Slash commands | `.claude/skills/*.md` → `/comando`                             | `.github/skills/*/SKILL.md`                     |
+| Configuração central    | `.claude/settings.json`                                        | `.github/hooks/hooks.json`                      |
+| Hooks                   | 5 tipos: Pre/PostToolUse, UserPromptSubmit, Notification, Stop | PreToolUse e PostToolUse                        |
+| Permissões              | `permissions.allow/deny` no settings.json                      | Apenas `tools` (lista positiva)                 |
+| Bloqueio em hooks       | `exit 2`                                                       | JSON `{"permissionDecision":"deny"}`            |
+| Memória persistente     | `memory: project` ou `memory: user` (nativo)                   | Não tem nativo (usar MCP)                       |
+| Cloud agent             | Não (só local)                                                 | Sim (aba Agents no GitHub.com)                  |
+| CI/CD não-interativo    | `claude -p "prompt"` + `--output-format json`                  | Codex CLI com `--non-interactive`               |
+| Sessões persistentes    | `--resume <session-id>`                                        | Não tem                                         |
+| Firewall nativo         | Sim (`init-firewall.sh`)                                       | Sandbox automático no GitHub.com                |
+| Modelos                 | Sonnet, Opus, Haiku                                            | GPT-4o, o3, Claude, Gemini etc.                 |
+| MCP                     | `settings.json` (global ou por projeto)                        | YAML no agente ou config do repo                |
 
 ---
 
@@ -81,7 +87,7 @@ Independente da ferramenta, os princípios são os mesmos:
 Conceitos baseados em:
 
 - **Luan Moreno** — Engenharia de IA, Agentic Fleets, SDD, KBs + MCP
-- **Red Hax / Jornada de Dados** — Isolamento, TDD como guard rail, IaC, segurança corporativa
+- **Jornada de Dados** — Isolamento, TDD como guard rail, IaC, segurança corporativa
 - [Anthropic Claude Code](https://github.com/anthropics/claude-code) — Repositório oficial
 - [GitHub Copilot Docs](https://docs.github.com/en/copilot) — Documentação oficial
 - [awesome-copilot](https://github.com/github/awesome-copilot) — Exemplos da comunidade

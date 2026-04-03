@@ -1,6 +1,11 @@
+---
+title: "06 ⚙️ Settings e Permissões"
+tags: [claude-code, settings, permissoes, configuracao, hooks, seguranca]
+---
+
 # FASE 6: settings.json — Configuração Global e Permissões
 
-[← Anterior: Orquestração](./05-orquestracao-pratica.md) · [Índice](./README.md) · [Próxima: Hooks Avançados →](./07-hooks-avancados.md)
+[[05-orquestracao-pratica|← Anterior: Orquestração]] · [[README|Índice]] · [[07-hooks-avancados|Próxima: Hooks Avançados →]]
 
 ---
 
@@ -28,8 +33,6 @@ Padrões do Claude Code
 ---
 
 ## Estrutura Completa
-
-> [📋 Copiar settings de projeto](./arquivos/settings-projeto.json) · [📋 Copiar settings global](./arquivos/settings-global.json)
 
 ```json
 {
@@ -258,4 +261,4 @@ claude config unset model
 
 ---
 
-[← Anterior: Orquestração](./05-orquestracao-pratica.md) · [Índice](./README.md) · [Próxima: Hooks Avançados →](./07-hooks-avancados.md)
+[[05-orquestracao-pratica|← Anterior: Orquestração]] · [[README|Índice]] · [[07-hooks-avancados|Próxima: Hooks Avançados →]]

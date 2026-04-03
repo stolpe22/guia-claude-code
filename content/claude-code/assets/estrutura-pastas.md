@@ -15,17 +15,17 @@
 
 | # | Fase | Descrição |
 |---|---|---|
-| 1 | [Isolamento com Dev Container](./01-isolamento-devcontainer.md) | Docker + firewall + sandbox — nunca rode IA no host |
-| 2 | [Cérebro e Knowledge Bases](./02-cerebro-knowledge-bases.md) | CLAUDE.md, memória de agentes, MCP com banco vetorial |
-| 3 | [Frota de Subagentes](./03-frota-subagentes.md) | Agentes especializados com ferramentas restritas |
-| 4 | [Hooks de Segurança](./04-hooks-seguranca.md) | Scripts que interceptam e bloqueiam comandos perigosos |
-| 5 | [Orquestração Prática](./05-orquestracao-pratica.md) | Como comandar a frota no dia a dia |
+| 1 | [[01-isolamento-devcontainer\|Isolamento com Dev Container]] | Docker + firewall + sandbox — nunca rode IA no host |
+| 2 | [[02-cerebro-knowledge-bases\|Cérebro e Knowledge Bases]] | CLAUDE.md, memória de agentes, MCP com banco vetorial |
+| 3 | [[03-frota-subagentes\|Frota de Subagentes]] | Agentes especializados com ferramentas restritas |
+| 4 | [[04-hooks-seguranca\|Hooks de Segurança]] | Scripts que interceptam e bloqueiam comandos perigosos |
+| 5 | [[05-orquestracao-pratica\|Orquestração Prática]] | Como comandar a frota no dia a dia |
 
 ---
 
 ## 📁 Arquivos Prontos para Copiar
 
-Todos os arquivos de configuração estão na pasta [`arquivos/`](./arquivos/). Copie para as pastas corretas do seu projeto:
+Todos os arquivos de configuração estão na pasta `arquivos/`. Copie para as pastas corretas do seu projeto:
 
 ```
 arquivos/Dockerfile                → .devcontainer/Dockerfile

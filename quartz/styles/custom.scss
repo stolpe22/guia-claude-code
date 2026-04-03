@@ -1,0 +1,343 @@
+@use "./base.scss";
+
+// ============================================================
+// Knowledge Graph — Claude Code & SDD
+// Custom styles: Catppuccin palette, Graph, Callouts, Code
+// ============================================================
+
+// ------------------------------------------------------------
+// Tipografia e espaçamento
+// ------------------------------------------------------------
+
+:root {
+  --font-body: "Inter", system-ui, -apple-system, sans-serif;
+  --font-code: "JetBrains Mono", "Fira Code", monospace;
+  --line-height-body: 1.75;
+  --letter-spacing-body: -0.01em;
+}
+
+body {
+  font-family: var(--font-body);
+  line-height: var(--line-height-body);
+  letter-spacing: var(--letter-spacing-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+}
+
+article h1 { font-size: 2rem; margin-bottom: 1.5rem; }
+article h2 { font-size: 1.4rem; margin-top: 2.5rem; margin-bottom: 0.75rem; }
+article h3 { font-size: 1.15rem; margin-top: 2rem; margin-bottom: 0.5rem; }
+
+p { margin-bottom: 1.1rem; }
+
+// ------------------------------------------------------------
+// Links com estilo diferenciado (wikilinks e externos)
+// ------------------------------------------------------------
+
+article a {
+  text-decoration: none;
+  border-bottom: 1.5px solid var(--secondary);
+  color: var(--secondary);
+  transition: color 0.15s ease, border-color 0.15s ease, background-color 0.15s ease;
+  padding-bottom: 1px;
+
+  &:hover {
+    background-color: var(--highlight);
+    border-radius: 3px;
+    padding: 0 3px 1px;
+  }
+}
+
+// Links externos com indicador
+article a[href^="http"]::after {
+  content: " ↗";
+  font-size: 0.75em;
+  opacity: 0.6;
+  vertical-align: super;
+}
+
+// ------------------------------------------------------------
+// Code blocks — syntax highlighting com fundo bonito
+// ------------------------------------------------------------
+
+pre {
+  border-radius: 10px !important;
+  padding: 1.25rem 1.5rem !important;
+  overflow-x: auto;
+  border: 1px solid var(--lightgray);
+  font-size: 0.88rem;
+  line-height: 1.65;
+  position: relative;
+}
+
+code {
+  font-family: var(--font-code);
+  font-size: 0.88em;
+  font-feature-settings: "liga" 1, "calt" 1;
+}
+
+:not(pre) > code {
+  background: var(--lightgray);
+  color: var(--tertiary);
+  padding: 0.15em 0.4em;
+  border-radius: 4px;
+  font-size: 0.875em;
+}
+
+// Label da linguagem no code block
+pre[data-language]::before {
+  content: attr(data-language);
+  position: absolute;
+  top: 0.5rem;
+  right: 0.75rem;
+  font-size: 0.7rem;
+  font-family: var(--font-code);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  opacity: 0.4;
+  color: var(--darkgray);
+}
+
+// ------------------------------------------------------------
+// Callouts / Admonitions estilizados
+// ------------------------------------------------------------
+
+.callout {
+  border-radius: 8px;
+  border-left-width: 4px;
+  padding: 0.9rem 1.1rem;
+  margin: 1.5rem 0;
+  font-size: 0.95rem;
+
+  .callout-title {
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 0.4rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+}
+
+// Tip
+.callout[data-callout="tip"],
+.callout[data-callout="dica"] {
+  background: rgba(166, 227, 161, 0.12);
+  border-color: #a6e3a1;
+  .callout-title { color: #a6e3a1; }
+}
+
+// Warning / Aviso
+.callout[data-callout="warning"],
+.callout[data-callout="aviso"],
+.callout[data-callout="caution"] {
+  background: rgba(249, 226, 175, 0.12);
+  border-color: #f9e2af;
+  .callout-title { color: #f9e2af; }
+}
+
+// Note / Info
+.callout[data-callout="note"],
+.callout[data-callout="info"] {
+  background: rgba(137, 180, 250, 0.12);
+  border-color: #89b4fa;
+  .callout-title { color: #89b4fa; }
+}
+
+// Important / Crítico
+.callout[data-callout="important"],
+.callout[data-callout="critico"] {
+  background: rgba(243, 139, 168, 0.12);
+  border-color: #f38ba8;
+  .callout-title { color: #f38ba8; }
+}
+
+// Success / Done
+.callout[data-callout="success"],
+.callout[data-callout="done"] {
+  background: rgba(166, 227, 161, 0.12);
+  border-color: #a6e3a1;
+  .callout-title { color: #a6e3a1; }
+}
+
+// ------------------------------------------------------------
+// Graph View — cores por pasta
+// ------------------------------------------------------------
+
+.graph {
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid var(--lightgray);
+}
+
+// Cores dos nós por pasta (injetadas via data-attrs pelo Quartz)
+// claude-code → azul Catppuccin
+// conceitos   → verde Catppuccin
+// default     → lavanda
+
+svg.graph-outer {
+  // Tamanho mínimo para o grafo ser impactante
+  min-height: 280px;
+}
+
+// ------------------------------------------------------------
+// Tabelas
+// ------------------------------------------------------------
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+  margin: 1.5rem 0;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--lightgray);
+}
+
+thead tr {
+  background: var(--lightgray);
+  font-weight: 700;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+th, td {
+  padding: 0.65rem 0.9rem;
+  text-align: left;
+  border-bottom: 1px solid var(--lightgray);
+}
+
+tbody tr:last-child td { border-bottom: none; }
+
+tbody tr:hover {
+  background: var(--highlight);
+  transition: background 0.15s ease;
+}
+
+// ------------------------------------------------------------
+// Scrollbar customizada
+// ------------------------------------------------------------
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--light);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--lightgray);
+  border-radius: 3px;
+
+  &:hover {
+    background: var(--gray);
+  }
+}
+
+// ------------------------------------------------------------
+// Sidebar Explorer
+// ------------------------------------------------------------
+
+.folder-title {
+  font-weight: 600;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  opacity: 0.7;
+}
+
+// ------------------------------------------------------------
+// Tags
+// ------------------------------------------------------------
+
+.tag-link, a[href^="/tags/"] {
+  background: var(--lightgray);
+  color: var(--secondary);
+  border: none !important;
+  border-radius: 100px;
+  padding: 0.15em 0.65em;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: lowercase;
+  transition: background 0.15s;
+
+  &:hover {
+    background: var(--highlight);
+    padding: 0.15em 0.65em;
+  }
+}
+
+// ------------------------------------------------------------
+// Breadcrumbs
+// ------------------------------------------------------------
+
+.breadcrumb-container {
+  font-size: 0.82rem;
+  opacity: 0.6;
+  margin-bottom: 0.5rem;
+}
+
+// ------------------------------------------------------------
+// Animações de transição SPA
+// ------------------------------------------------------------
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+article.popover-hint {
+  animation: fadeInUp 0.2s ease;
+}
+
+// ------------------------------------------------------------
+// Popovers (link preview)
+// ------------------------------------------------------------
+
+.popover {
+  border-radius: 10px;
+  border: 1px solid var(--lightgray);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(8px);
+  overflow: hidden;
+
+  .popover-inner {
+    padding: 1rem 1.25rem;
+    font-size: 0.88rem;
+    line-height: 1.6;
+  }
+}
+
+// ------------------------------------------------------------
+// Mobile
+// ------------------------------------------------------------
+
+@media (max-width: 800px) {
+  article h1 { font-size: 1.6rem; }
+  article h2 { font-size: 1.25rem; }
+
+  pre {
+    font-size: 0.82rem;
+    padding: 1rem !important;
+  }
+
+  table { font-size: 0.82rem; }
+}

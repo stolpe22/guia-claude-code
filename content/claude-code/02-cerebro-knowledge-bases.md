@@ -1,6 +1,11 @@
+---
+title: "02 🧠 Cérebro e Knowledge Bases"
+tags: [claude-code, claude-md, knowledge-base, memoria, mcp, contexto, sdd]
+---
+
 # FASE 2: O Cérebro do Projeto e Bases de Conhecimento
 
-[← Anterior: Dev Container](./01-isolamento-devcontainer.md) · [Índice](./README.md) · [Próxima: Subagentes →](./03-frota-subagentes.md)
+[[01-isolamento-devcontainer|← Anterior: Dev Container]] · [[README|Índice]] · [[03-frota-subagentes|Próxima: Subagentes →]]
 
 ---
 
@@ -10,7 +15,7 @@
 
 Na raiz do seu projeto, crie `CLAUDE.md`. É lido **automaticamente** pelo Claude Code no início de cada sessão.
 
-> [📋 Template pronto](./arquivos/CLAUDE.md)
+> [[CLAUDE|📋 Template pronto]]
 
 ```markdown
 # Regras do Projeto
@@ -112,7 +117,7 @@ A IA acumula aprendizados entre sessões:
 - Decisões arquiteturais tomadas
 - Preferências do time
 
-**Não precisa configurar nada além do campo `memory`.** Veja a [Fase 3](./03-frota-subagentes.md) para uso nos agentes.
+**Não precisa configurar nada além do campo `memory`.** Veja a [[03-frota-subagentes|Fase 3]] para uso nos agentes.
 
 ### Gerenciando a Memória Manualmente
 
@@ -155,4 +160,4 @@ Assim seus agentes consultam toda a base de conhecimento da empresa em tempo rea
 
 ---
 
-[← Anterior: Dev Container](./01-isolamento-devcontainer.md) · [Índice](./README.md) · [Próxima: Subagentes →](./03-frota-subagentes.md)
+[[01-isolamento-devcontainer|← Anterior: Dev Container]] · [[README|Índice]] · [[03-frota-subagentes|Próxima: Subagentes →]]

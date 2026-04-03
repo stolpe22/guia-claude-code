@@ -1,10 +1,15 @@
-# FASE 7: Hooks Avançados — Todos os Tipos
+---
+title: "07 🪝 Hooks Avançados"
+tags: [claude-code, hooks, seguranca, automacao, audit-log, notificacao, ci-cd]
+---
 
-[← Anterior: Settings](./06-settings-permissoes.md) · [Índice](./README.md) · [Próxima: MCP →](./08-mcp-ferramentas.md)
+# FASE 7: 07 🪝 Hooks Avançados
+
+[[06-settings-permissoes|← Anterior: Settings]] · [[README|Índice]] · [[08-mcp-ferramentas|Próxima: MCP →]]
 
 ---
 
-> A [Fase 4](./04-hooks-seguranca.md) cobriu `PreToolUse` para bloqueio defensivo. Aqui você aprende os outros 4 tipos de hook — para logging, injeção de contexto, notificações e relatórios pós-sessão.
+> A [[04-hooks-seguranca|Fase 4]] cobriu `PreToolUse` para bloqueio defensivo. Aqui você aprende os outros 4 tipos de hook — para logging, injeção de contexto, notificações e relatórios pós-sessão.
 
 ## Os 5 Tipos de Hook
 
@@ -108,7 +113,7 @@ exit 0
 
 ## ② PreToolUse — Bloquear Antes de Executar
 
-Coberto na [Fase 4](./04-hooks-seguranca.md). Resumo dos exit codes:
+Coberto na [[04-hooks-seguranca|Fase 4]]. Resumo dos exit codes:
 
 | Exit Code | Efeito |
 |---|---|
@@ -344,4 +349,4 @@ Exemplo completo de `.claude/settings.json` corporativo:
 
 ---
 
-[← Anterior: Settings](./06-settings-permissoes.md) · [Índice](./README.md) · [Próxima: MCP →](./08-mcp-ferramentas.md)
+[[06-settings-permissoes|← Anterior: Settings]] · [[README|Índice]] · [[08-mcp-ferramentas|Próxima: MCP →]]

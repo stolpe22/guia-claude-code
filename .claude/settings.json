@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "permissions": {
+    "allow": [
+      "Bash(npx quartz build)",
+      "Bash(npx quartz build --serve)",
+      "Bash(npx quartz sync)",
+      "Bash(npm i)",
+      "Bash(npm install)",
+      "Bash(git clone https://github.com/jackyzha0/quartz.git .quartz-temp)",
+      "Bash(rm -rf .quartz-temp)",
+      "Bash(cp -r *)",
+      "Bash(ls *)",
+      "Bash(cat *)",
+      "Bash(find *)",
+      "Bash(grep *)"
+    ],
+    "deny": [
+      "Read(./.env)",
+      "Read(./.env.*)",
+      "Read(./.github/workflows/deploy.yml)",
+      "Bash(rm -rf content)",
+      "Bash(rm -rf content/)",
+      "Bash(rm -r content)",
+      "Bash(rm -r content/)"
+    ]
+  },
+  "env": {
+    "NODE_ENV": "development"
+  },
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "npx quartz build 2>&1 | tail -5",
+            "async": true
+          }
+        ]
+      }
+    ]
+  }
+}

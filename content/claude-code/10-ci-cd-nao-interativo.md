@@ -1,6 +1,11 @@
+---
+title: "10 🔄 CI/CD Não-Interativo"
+tags: [claude-code, ci-cd, automacao, github-actions, nao-interativo, shell, pipeline]
+---
+
 # FASE 10: Claude Code em CI/CD (Modo Não-Interativo)
 
-[← Anterior: Skills](./09-skills-slash-commands.md) · [Índice](./README.md)
+[[09-skills-slash-commands|← Anterior: Skills]] · [[README|Índice]]
 
 ---
 
@@ -95,8 +100,6 @@ bash scripts/generate-changelog.sh 2.1.0 >> CHANGELOG.md
 
 ```bash
 #!/bin/bash
-# Roda testes, captura saída e pede análise
-
 COVERAGE=$(pytest --cov=. --cov-report=term-missing -q 2>&1)
 
 echo "$COVERAGE" | claude -p "
@@ -245,6 +248,7 @@ jobs:
       - name: Generate Notes
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           PREV_TAG=$(git describe --tags --abbrev=0 HEAD~1 2>/dev/null || echo "")
           if [ -n "$PREV_TAG" ]; then
@@ -260,8 +264,6 @@ jobs:
           " --output-format text)
 
           gh release edit ${{ github.ref_name }} --notes "$NOTES"
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 ```
 
 ---
@@ -273,7 +275,7 @@ jobs:
 | Use `--output-format json` para parsing | Evita quebrar com mudanças no texto de saída |
 | Defina timeout nos steps | Sessões longas podem travar o pipeline |
 | Use `ANTHROPIC_API_KEY` como secret | Nunca hardcode no workflow |
-| Combine com `permissions.deny` no settings | O Claude no CI não precisa de Bash livre |
+| Combine com `permissions.deny` no [[06-settings-permissoes\|settings.json]] | O Claude no CI não precisa de Bash livre |
 | Prefira saídas curtas e objetivas no prompt | Reduz custo e latência no CI |
 | Use `--dangerously-skip-permissions` só em ambientes isolados | Pule confirmações apenas em containers descartáveis |
 
@@ -316,4 +318,4 @@ jobs:
 
 ---
 
-[← Anterior: Skills](./09-skills-slash-commands.md) · [Índice](./README.md)
+[[09-skills-slash-commands|← Anterior: Skills]] · [[README|Índice]]

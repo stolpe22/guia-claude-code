@@ -1,6 +1,11 @@
+---
+title: "09 ⚡ Skills e Slash Commands"
+tags: [claude-code, skills, slash-commands, produtividade, automacao, fluxo-de-trabalho]
+---
+
 # FASE 9: Skills e Slash Commands
 
-[← Anterior: MCP](./08-mcp-ferramentas.md) · [Índice](./README.md) · [Próxima: CI/CD →](./10-ci-cd-nao-interativo.md)
+[[08-mcp-ferramentas|← Anterior: MCP]] · [[README|Índice]] · [[10-ci-cd-nao-interativo|Próxima: CI/CD →]]
 
 ---
 
@@ -65,7 +70,7 @@ Ex: /review-pr 123  →  $ARGUMENTS = "123"
 
 ### 📋 /review-pr
 
-> [📋 Copiar arquivo](./arquivos/skills/review-pr.md)
+Revisa o PR atual com foco em segurança, qualidade e testes.
 
 ```markdown
 ---
@@ -76,28 +81,18 @@ Analise o Pull Request atual seguindo estas etapas:
 
 1. Rode `gh pr diff` para ver todas as mudanças
 2. Rode `gh pr view` para contexto (título, descrição, labels)
-3. Avalie:
-   - **Segurança**: credenciais expostas, inputs não validados, SQL injection
-   - **Qualidade**: DRY, SOLID, complexidade desnecessária
-   - **Testes**: cobertura das mudanças, edge cases cobertos
-   - **Documentação**: funções públicas documentadas
-4. Gere um relatório estruturado:
-   - 🔴 Bloqueadores (impedem merge)
-   - 🟡 Avisos (devem ser corrigidos)
-   - 🟢 Sugestões (nice-to-have)
-5. Poste o review com `gh pr review --comment -b "seu relatório"`
+3. Avalie segurança, qualidade, testes e documentação
+4. Gere relatório com 🔴 Bloqueadores, 🟡 Avisos, 🟢 Sugestões
+5. Poste com `gh pr review --comment -b "seu relatório"`
 ```
 
-**Como usar:**
-```
-/review-pr
-```
+**Como usar:** `/review-pr`
 
 ---
 
 ### 🚀 /deploy-check
 
-> [📋 Copiar arquivo](./arquivos/skills/deploy-check.md)
+Checklist completo antes de um deploy em produção.
 
 ```markdown
 ---
@@ -106,26 +101,23 @@ description: Checklist completo antes de um deploy em produção.
 
 Execute o checklist de pre-deploy:
 
-1. **Testes:** `pytest --tb=short -q` — reporte falhas
-2. **Lint:** `ruff check . && mypy .` — reporte erros de tipo
-3. **Migrations pendentes:** `alembic history` — verifique se há migrations não aplicadas
-4. **Variáveis de ambiente:** verifique se `.env.production` tem todas as variáveis do `.env.example`
-5. **Changelog:** leia `git log origin/main..HEAD --oneline` — liste o que será deployado
-6. **Dependências:** `pip list --outdated` — alerte sobre deps com CVEs conhecidos
+1. **Testes:** `pytest --tb=short -q`
+2. **Lint:** `ruff check . && mypy .`
+3. **Migrations:** `alembic history` — pendentes?
+4. **Envs:** `.env.production` tem todas as vars do `.env.example`?
+5. **Changelog:** `git log origin/main..HEAD --oneline`
+6. **Deps:** `pip list --outdated` — CVEs conhecidos?
 
-Gere um relatório GO/NO-GO com justificativa clara.
+Gere relatório GO/NO-GO com justificativa.
 ```
 
-**Como usar:**
-```
-/deploy-check
-```
+**Como usar:** `/deploy-check`
 
 ---
 
 ### 📊 /daily-report
 
-> [📋 Copiar arquivo](./arquivos/skills/daily-report.md)
+Relatório diário de atividade do repositório pronto para Slack.
 
 ```markdown
 ---
@@ -134,128 +126,93 @@ description: Gera relatório diário de atividade do repositório.
 
 Gere o relatório de atividade do dia:
 
-1. `git log --since="24 hours ago" --oneline --all` — commits do dia
-2. `gh pr list --state open` — PRs aguardando review
-3. `gh issue list --assignee @me --state open` — issues abertas para você
-4. `gh run list --limit 5` — últimas execuções de CI/CD
+1. `git log --since="24 hours ago" --oneline --all`
+2. `gh pr list --state open`
+3. `gh issue list --assignee @me --state open`
+4. `gh run list --limit 5`
 
-Formate em Markdown pronto para colar no Slack:
-- ✅ O que foi concluído
-- 🔄 Em progresso
-- 🚧 Bloqueios
-- 📋 Próximos passos
+Formate em Markdown:
+- ✅ Concluído, 🔄 Em progresso, 🚧 Bloqueios, 📋 Próximos passos
 ```
 
-**Como usar:**
-```
-/daily-report
-```
-
----
-
-### 🧪 /test-coverage
-
-> [📋 Copiar arquivo](./arquivos/skills/test-coverage.md)
-
-```markdown
----
-description: Analisa cobertura de testes e aponta gaps críticos.
----
-
-Analise a cobertura de testes do projeto:
-
-1. Rode `pytest --cov=. --cov-report=term-missing -q`
-2. Identifique módulos com cobertura abaixo de 80%
-3. Para cada módulo crítico sem cobertura, liste:
-   - Funções/classes não testadas
-   - Casos de borda mais prováveis
-   - Complexidade ciclomática estimada
-4. Priorize por risco: lógica de negócio > utils > scripts
-5. Gere um plano de ação ordenado por impacto
-
-Não escreva os testes — apenas o plano para @test-writer implementar.
-```
-
-**Como usar:**
-```
-/test-coverage
-```
+**Como usar:** `/daily-report`
 
 ---
 
 ### 🔒 /security-scan
 
-> [📋 Copiar arquivo](./arquivos/skills/security-scan.md)
+Auditoria de segurança completa do repositório.
 
 ```markdown
 ---
 description: Scan de segurança completo do repositório.
 ---
 
-Execute uma auditoria de segurança completa:
+Auditoria completa:
 
-1. **Dependências:** `pip-audit` ou `npm audit` — CVEs conhecidos
-2. **Segredos expostos:** busque por `password`, `secret`, `api_key`, `token` em arquivos de código (excluindo `.env` e testes)
-3. **SQL Injection:** busque por queries com concatenação de string em vez de parâmetros
-4. **Variáveis de ambiente:** verifique se há valores hardcoded que deveriam ser envs
-5. **Permissões de arquivo:** `find . -name "*.sh" -perm /o+w` — scripts world-writable
-6. **Headers de segurança:** se for API web, verifique CORS, CSRF, rate limiting
+1. **Dependências:** `pip-audit` ou `npm audit`
+2. **Segredos expostos:** busca por `password`, `secret`, `api_key`, `token`
+3. **SQL Injection:** queries com concatenação de string?
+4. **Envs hardcoded:** valores que deveriam ser variáveis de ambiente?
+5. **Permissões:** `find . -name "*.sh" -perm /o+w`
+6. **Headers:** CORS, CSRF, rate limiting configurados?
 
-Classifique tudo em Crítico / Alto / Médio / Baixo com remediação recomendada.
+Classifique: Crítico / Alto / Médio / Baixo + remediação.
 ```
 
-**Como usar:**
-```
-/security-scan
-```
+**Como usar:** `/security-scan`
 
 ---
 
-### 🏗️ /adr (Architecture Decision Record)
+### 🧪 /test-coverage
 
-> [📋 Copiar arquivo](./arquivos/skills/adr.md)
+Analisa cobertura e aponta gaps críticos para o [[03-frota-subagentes|@test-writer]] implementar.
 
 ```markdown
 ---
-description: Cria um ADR (Architecture Decision Record) para uma decisão técnica. Use: /adr <título>
+description: Analisa cobertura de testes e aponta gaps críticos.
 ---
 
-Crie um ADR para a decisão: $ARGUMENTS
+Analise a cobertura de testes:
 
-Siga o template:
+1. `pytest --cov=. --cov-report=term-missing -q`
+2. Módulos com cobertura < 80%
+3. Para cada módulo crítico: funções não testadas, edge cases, complexidade
+4. Priorize: lógica de negócio > utils > scripts
+5. Plano de ação por impacto (não escreva os testes — gere o plano para @test-writer)
+```
+
+**Como usar:** `/test-coverage`
+
+---
+
+### 🏗️ /adr
+
+Cria um ADR (Architecture Decision Record) formatado.
+
+```markdown
+---
+description: Cria um ADR (Architecture Decision Record). Use: /adr <título>
+---
+
+Crie um ADR para: $ARGUMENTS
+
+Template:
 
 # ADR-NNN: $ARGUMENTS
 
-**Status:** Proposed
-**Data:** (data de hoje)
-**Autores:** (branch/usuário atual)
+**Status:** Proposed | **Data:** hoje | **Autores:** `git config user.name`
 
 ## Contexto
-Descreva o problema ou situação que motivou esta decisão.
-
 ## Decisão
-Descreva a decisão tomada de forma clara e direta.
-
-## Consequências
-### Positivas
-- ...
-
-### Negativas / Trade-offs
-- ...
-
+## Consequências (Positivas / Negativas)
 ## Alternativas Consideradas
-| Alternativa | Por que foi descartada |
-|---|---|
-| ... | ... |
 
 Salve em `docs/adr/ADR-NNN-titulo-kebab-case.md`.
-Incremente o número baseado nos ADRs existentes em `docs/adr/`.
+Consulte `ls docs/adr/` para o próximo número.
 ```
 
-**Como usar:**
-```
-/adr Migrar de REST para GraphQL na API de produtos
-```
+**Como usar:** `/adr Migrar de REST para GraphQL`
 
 ---
 
@@ -265,12 +222,12 @@ Skills invocam o Claude principal, mas você pode direcionar para um agente:
 
 ```markdown
 ---
-description: Review de PR usando o code-reviewer especializado.
+description: Review de PR usando o agente especializado.
 ---
 
 @code-reviewer revise o PR atual:
 1. `gh pr diff` para ver as mudanças
-2. Foque especialmente em segurança e testes
+2. Foque em segurança e testes
 3. Seja rigoroso — este PR vai para produção
 ```
 
@@ -284,11 +241,11 @@ Quando a sessão acumula muito contexto (implementações longas, muitos arquivo
 /compact
 ```
 
-O Claude cria um resumo denso do que foi feito e descarta o histórico bruto. O trabalho continua, mas com tokens liberados. Use antes de:
+O Claude cria um resumo denso e descarta o histórico bruto. Use antes de:
 - Pedir uma nova feature grande
 - Trocar de contexto (de backend para frontend)
 - Sessões que passam de 1-2 horas
 
 ---
 
-[← Anterior: MCP](./08-mcp-ferramentas.md) · [Índice](./README.md) · [Próxima: CI/CD →](./10-ci-cd-nao-interativo.md)
+[[08-mcp-ferramentas|← Anterior: MCP]] · [[README|Índice]] · [[10-ci-cd-nao-interativo|Próxima: CI/CD →]]

@@ -1,6 +1,11 @@
+---
+title: "05 🎯 Orquestração Prática"
+tags: [claude-code, orquestracao, agentes, terminal, slash-commands, tdd, fluxo-de-trabalho]
+---
+
 # FASE 5: Comandando a Frota (Orquestração Prática)
 
-[← Anterior: Hooks](./04-hooks-seguranca.md) · [Índice](./README.md)
+[[04-hooks-seguranca|← Anterior: Hooks]] · [[README|Índice]] · [[06-settings-permissoes|Próxima: Settings →]]
 
 ---
 
@@ -159,4 +164,4 @@ A grande vantagem: **múltiplos terminais simultâneos**.
 
 ---
 
-[← Anterior: Hooks](./04-hooks-seguranca.md) · [Índice](./README.md)
+[[04-hooks-seguranca|← Anterior: Hooks]] · [[README|Índice]] · [[06-settings-permissoes|Próxima: Settings →]]

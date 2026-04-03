@@ -1,6 +1,11 @@
+---
+title: "00 🧠 Mindset & SDD"
+tags: [claude-code, sdd, mindset, especificacao, design-upfront]
+---
+
 # FASE 0: Mindset Shift e Spec Driven Development (SDD)
 
-[Índice](./README.md) · [Próxima: Isolamento →](./01-isolamento-devcontainer.md)
+[[README|Índice]] · [[01-isolamento-devcontainer|Próxima: Isolamento →]]
 
 ---
 
@@ -19,7 +24,7 @@ Antes de abrir o terminal para o Claude Code, o líder técnico precisa definir 
 
 Crie o hábito de escrever um documento de especificação (PRD/Spec) para cada nova feature complexa. A IA lerá este documento para implementar a solução exata.
 
-> [📋 Copiar Template de Spec](./arquivos/SPEC.md)
+> Copie de `arquivos/SPEC.md` no repositório
 
 **O que uma Spec deve conter:**
 

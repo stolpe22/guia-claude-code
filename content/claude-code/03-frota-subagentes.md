@@ -1,6 +1,11 @@
+---
+title: "03 🤖 Frota de Subagentes"
+tags: [claude-code, subagentes, agentes, ferramentas, guard-rails]
+---
+
 # FASE 3: Criando a Frota de Subagentes Especializados
 
-[← Anterior: Knowledge Bases](./02-cerebro-knowledge-bases.md) · [Índice](./README.md) · [Próxima: Hooks →](./04-hooks-seguranca.md)
+[[02-cerebro-knowledge-bases|← Anterior: Knowledge Bases]] · [[README|Índice]] · [[04-hooks-seguranca|Próxima: Hooks →]]
 
 ---
 
@@ -53,7 +58,7 @@ Define o comportamento do agente.
 
 ### 🔍 Code Reviewer (Gatekeeper)
 
-> [📋 Copiar arquivo](./arquivos/code-reviewer.md)
+> [[code-reviewer|📋 Copiar arquivo]]
 
 ```markdown
 ---
@@ -82,7 +87,7 @@ Quando invocado:
 
 ### 🏗️ Architect
 
-> [📋 Copiar arquivo](./arquivos/architect.md)
+> [[architect|📋 Copiar arquivo]]
 
 ```markdown
 ---
@@ -104,7 +109,7 @@ Quando invocado:
 
 ### 🧪 Test Writer
 
-> [📋 Copiar arquivo](./arquivos/test-writer.md)
+> [[test-writer|📋 Copiar arquivo]]
 
 ```markdown
 ---
@@ -126,7 +131,7 @@ Quando invocado:
 
 ### 🗄️ DB Reader (com Hook de segurança)
 
-> [📋 Copiar arquivo](./arquivos/db-reader.md) — Veja a [Fase 4](./04-hooks-seguranca.md) para o hook de segurança.
+> [[db-reader|📋 Copiar arquivo]] — Veja a [[04-hooks-seguranca|Fase 4]] para o hook de segurança.
 
 ```markdown
 ---
@@ -163,4 +168,4 @@ Sem criar arquivo na mão:
 
 ---
 
-[← Anterior: Knowledge Bases](./02-cerebro-knowledge-bases.md) · [Índice](./README.md) · [Próxima: Hooks →](./04-hooks-seguranca.md)
+[[02-cerebro-knowledge-bases|← Anterior: Knowledge Bases]] · [[README|Índice]] · [[04-hooks-seguranca|Próxima: Hooks →]]

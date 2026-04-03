@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(grep -rn \"^\\\\[←\\\\|^> \\\\[📋\\\\|\\\\]\\\\\\(\\\\./[0-9]\" /workspace/content/claude-code/*.md)",
+      "Bash(grep -rn \"^---$\" /workspace/content/claude-code/*.md)",
+      "Bash(grep -rn \"title:\" /workspace/content/claude-code/*.md)",
+      "Bash(cp:*)",
+      "Bash(pkill -f \"quartz build\")",
+      "Bash(kill 25471)",
+      "Bash(echo \"PID: $!\")",
+      "Bash(python3:*)"
+    ]
+  }
+}

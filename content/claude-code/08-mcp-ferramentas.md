@@ -1,6 +1,11 @@
+---
+title: "08 🔌 MCP e Ferramentas Externas"
+tags: [claude-code, mcp, integracao, ferramentas, github, postgresql, slack, knowledge-base]
+---
+
 # FASE 8: MCP — Conectando Ferramentas Externas
 
-[← Anterior: Hooks Avançados](./07-hooks-avancados.md) · [Índice](./README.md) · [Próxima: Skills →](./09-skills-slash-commands.md)
+[[07-hooks-avancados|← Anterior: Hooks Avançados]] · [[README|Índice]] · [[09-skills-slash-commands|Próxima: Skills →]]
 
 ---
 
@@ -85,7 +90,7 @@ Executa queries diretamente no banco — com controle total de permissões via c
 }
 ```
 
-> Use um usuário de banco **somente-leitura** para máxima segurança. Combine com o hook `validate-readonly-query.sh` da [Fase 4](./04-hooks-seguranca.md).
+> Use um usuário de banco **somente-leitura** para máxima segurança. Combine com o hook `validate-readonly-query.sh` da [[04-hooks-seguranca|Fase 4]].
 
 **Como usar:**
 ```
@@ -190,6 +195,8 @@ Para documentação interna, RFCs, Confluence — a KB da empresa.
 }
 ```
 
+> Veja [[02-cerebro-knowledge-bases|Fase 2]] para o fluxo completo de ingestão de dados (N8N → banco vetorial → MCP).
+
 **Como usar:**
 ```
 Qual é o processo de aprovação de deploy em produção segundo as nossas políticas internas?
@@ -262,10 +269,10 @@ Você: "@github-analyst analise os PRs da última semana"
 
 ## Onde Encontrar Mais Servidores MCP
 
-- [modelcontextprotocol.io/servers](https://modelcontextprotocol.io/servers) — catálogo oficial
-- [github.com/modelcontextprotocol](https://github.com/modelcontextprotocol) — repositórios oficiais
+- Catálogo oficial: `modelcontextprotocol.io/servers`
+- Repositórios oficiais: `github.com/modelcontextprotocol`
 - Servidores da comunidade: Linear, Jira, Notion, Datadog, Sentry, AWS, Kubernetes
 
 ---
 
-[← Anterior: Hooks Avançados](./07-hooks-avancados.md) · [Índice](./README.md) · [Próxima: Skills →](./09-skills-slash-commands.md)
+[[07-hooks-avancados|← Anterior: Hooks Avançados]] · [[README|Índice]] · [[09-skills-slash-commands|Próxima: Skills →]]

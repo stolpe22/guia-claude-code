@@ -1,3 +1,9 @@
+---
+title: "Guia Completo: Ambiente Claude Code Seguro"
+tags: [claude-code, indice, sdd, seguranca, devcontainer, agentes, hooks, mcp, skills]
+aliases: [claude-code-index, guia-claude-code]
+---
+
 # 🛡️ Guia Completo: Ambiente Claude Code Seguro
 
 > Ambiente isolado, com firewall, subagentes especializados, guard rails e metodologias SDD/TDD.
@@ -15,23 +21,23 @@
 
 | #   | Fase                                                                    | Descrição                                                    |
 | --- | ----------------------------------------------------------------------- | ------------------------------------------------------------ |
-| 0   | [Mindset & Spec Driven Dev](./00-mindset-sdd.md)                        | O Engenheiro como Comandante, SDD e Design Upfront           |
-| 1   | [Isolamento com Dev Container](./01-isolamento-devcontainer.md)         | Docker + firewall + sandbox — nunca rode IA no host          |
-| 2   | [Cérebro e Knowledge Bases](./02-cerebro-knowledge-bases.md)            | CLAUDE.md hierárquico, @imports, memória por escopo, MCP     |
-| 3   | [Frota de Subagentes](./03-frota-subagentes.md)                         | Agentes especializados com ferramentas restritas             |
-| 4   | [Hooks de Segurança](./04-hooks-seguranca.md)                           | Scripts que interceptam e bloqueiam comandos perigosos       |
-| 5   | [Orquestração Prática](./05-orquestracao-pratica.md)                    | Como comandar a frota, slash commands e --resume             |
-| 6   | [settings.json — Configuração Global](./06-settings-permissoes.md)      | Permissões granulares, deny/allow, variáveis de ambiente     |
-| 7   | [Hooks Avançados](./07-hooks-avancados.md)                              | PostToolUse, UserPromptSubmit, Notification, Stop            |
-| 8   | [MCP — Ferramentas Externas](./08-mcp-ferramentas.md)                   | GitHub, PostgreSQL, Slack, Brave Search, KB Vetorial         |
-| 9   | [Skills e Slash Commands](./09-skills-slash-commands.md)                | Comandos /customizados reutilizáveis por toda a equipe       |
-| 10  | [CI/CD Não-Interativo](./10-ci-cd-nao-interativo.md)                    | --print, GitHub Actions, review automático, release notes    |
+| 0   | [[00-mindset-sdd\|Mindset & Spec Driven Dev]]                           | O Engenheiro como Comandante, SDD e Design Upfront           |
+| 1   | [[01-isolamento-devcontainer\|Isolamento com Dev Container]]            | Docker + firewall + sandbox — nunca rode IA no host          |
+| 2   | [[02-cerebro-knowledge-bases\|Cérebro e Knowledge Bases]]               | CLAUDE.md hierárquico, @imports, memória por escopo, MCP     |
+| 3   | [[03-frota-subagentes\|Frota de Subagentes]]                            | Agentes especializados com ferramentas restritas             |
+| 4   | [[04-hooks-seguranca\|Hooks de Segurança]]                              | Scripts que interceptam e bloqueiam comandos perigosos       |
+| 5   | [[05-orquestracao-pratica\|Orquestração Prática]]                       | Como comandar a frota, slash commands e --resume             |
+| 6   | [[06-settings-permissoes\|settings.json — Configuração Global]]         | Permissões granulares, deny/allow, variáveis de ambiente     |
+| 7   | [[07-hooks-avancados\|Hooks Avançados]]                                 | PostToolUse, UserPromptSubmit, Notification, Stop            |
+| 8   | [[08-mcp-ferramentas\|MCP — Ferramentas Externas]]                      | GitHub, PostgreSQL, Slack, Brave Search, KB Vetorial         |
+| 9   | [[09-skills-slash-commands\|Skills e Slash Commands]]                   | Comandos /customizados reutilizáveis por toda a equipe       |
+| 10  | [[10-ci-cd-nao-interativo\|CI/CD Não-Interativo]]                       | --print, GitHub Actions, review automático, release notes    |
 
 ---
 
 ## 📁 Arquivos Prontos para Copiar
 
-Todos os arquivos de configuração estão na pasta [`arquivos/`](./arquivos/). Copie para as pastas corretas:
+Todos os arquivos de configuração estão na pasta `arquivos/`. Copie para as pastas corretas:
 
 ```
 arquivos/SPEC.md                        → docs/SPEC.md

@@ -1,6 +1,11 @@
+---
+title: "01 🐳 Isolamento (Dev Container)"
+tags: [claude-code, devcontainer, seguranca, docker, firewall]
+---
+
 # FASE 1: Isolamento de Segurança (Dev Container)
 
-[← Voltar ao Índice](./README.md) · [Próxima: Cérebro e KBs →](./02-cerebro-knowledge-bases.md)
+[[README|← Voltar ao Índice]] · [[02-cerebro-knowledge-bases|Próxima: Cérebro e KBs →]]
 
 ---
 
@@ -18,7 +23,7 @@ Crie a pasta `.devcontainer/` na raiz do projeto. Dentro dela, 3 arquivos. Todos
 
 ### Arquivo 1: `Dockerfile`
 
-> [📦 Fonte oficial](https://github.com/anthropics/claude-code/blob/main/.devcontainer/Dockerfile) · [📋 Copiar daqui](./arquivos/Dockerfile)
+> [📦 Fonte oficial](https://github.com/anthropics/claude-code/blob/main/.devcontainer/Dockerfile) · Copie de `arquivos/Dockerfile` no repositório
 
 ```dockerfile
 FROM node:20
@@ -96,7 +101,7 @@ USER node
 
 ### Arquivo 2: `devcontainer.json`
 
-> [📦 Fonte oficial](https://github.com/anthropics/claude-code/blob/main/.devcontainer/devcontainer.json) · [📋 Copiar daqui](./arquivos/devcontainer.json)
+> [📦 Fonte oficial](https://github.com/anthropics/claude-code/blob/main/.devcontainer/devcontainer.json) · Copie de `arquivos/devcontainer.json` no repositório
 
 ```jsonc
 {
@@ -163,7 +168,7 @@ USER node
 
 ### Arquivo 3: `init-firewall.sh`
 
-> [📦 Fonte oficial](https://github.com/anthropics/claude-code/blob/main/.devcontainer/init-firewall.sh) · [📋 Copiar daqui](./arquivos/init-firewall.sh)
+> [📦 Fonte oficial](https://github.com/anthropics/claude-code/blob/main/.devcontainer/init-firewall.sh) · Copie de `arquivos/init-firewall.sh` no repositório
 
 ```bash
 #!/bin/bash
@@ -293,4 +298,4 @@ Se não precisa do firewall, use apenas a [Dev Container Feature](https://github
 
 ---
 
-[← Voltar ao Índice](./README.md) · [Próxima: Cérebro e KBs →](./02-cerebro-knowledge-bases.md)
+[[README|← Voltar ao Índice]] · [[02-cerebro-knowledge-bases|Próxima: Cérebro e KBs →]]
