@@ -18,6 +18,8 @@ interface Message {
 let chunks: Chunk[] = []
 let chunksLoaded = false
 let sessionMessages: Message[] = []
+let siteBase = ""
+let chatIsOpen = false
 
 // ─── BM25-ish retrieval ───────────────────────────────────────────────────────
 
@@ -214,7 +216,13 @@ function renderMarkdown(text: string): string {
     .replace(/>/g, "&gt;")
     .replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>")
     .replace(/`([^`]+)`/g, "<code>$1</code>")
-    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>')
+    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, (_, linkText, url) => {
+      const isInternal = url.startsWith("/") && !url.startsWith("//")
+      if (isInternal && siteBase) {
+        return `<a href="${siteBase}${url.slice(1)}">${linkText}</a>`
+      }
+      return `<a href="${url}" target="_blank" rel="noopener">${linkText}</a>`
+    })
     .replace(/\n\n/g, "</p><p>")
     .replace(/\n/g, "<br>")
 }
@@ -261,6 +269,11 @@ document.addEventListener("nav", () => {
   if (!chunksLoaded) {
     const url = widget.dataset.chunksUrl
     if (url) {
+      if (!siteBase) {
+        try {
+          siteBase = new URL(url, window.location.href).href.replace(/static\/search-chunks\.json$/, "")
+        } catch {}
+      }
       fetch(url)
         .then((r) => r.json())
         .then((data: Chunk[]) => {
@@ -272,9 +285,6 @@ document.addEventListener("nav", () => {
         })
     }
   }
-
-  // Reset session history on each page nav
-  sessionMessages = []
 
   setupWidget(widget)
 })
@@ -340,14 +350,30 @@ function setupWidget(widget: HTMLElement) {
     useDefaultBtn.style.display = "block"
   }
 
-  // Reset messages display
+  // Restore messages display
   if (messagesContainer) {
-    messagesContainer.innerHTML = `
-      <div class="chat-welcome">
-        <div class="welcome-avatar">VC</div>
-        <p>Olá! Sou o <strong>Vibe Codinho</strong>.<br>
-        Pergunte sobre Claude Code, SDD ou qualquer coisa da doc.</p>
-      </div>`
+    const alreadyRendered = messagesContainer.querySelector(".user-message, .assistant-message")
+    if (!alreadyRendered) {
+      if (sessionMessages.length > 0) {
+        // DOM was recreated (e.g. hard nav) — re-render existing conversation
+        messagesContainer.innerHTML = ""
+        for (const msg of sessionMessages) {
+          appendMessage(messagesContainer, msg.role, msg.content)
+        }
+      } else {
+        messagesContainer.innerHTML = `
+          <div class="chat-welcome">
+            <div class="welcome-avatar">VC</div>
+            <p>Olá! Sou o <strong>Vibe Codinho</strong>.<br>
+            Pergunte sobre Claude Code, SDD ou qualquer coisa da doc.</p>
+          </div>`
+      }
+    }
+  }
+
+  // Restore modal open state across SPA navigations
+  if (chatIsOpen) {
+    safeModal.classList.add("chat-open")
   }
 
   // ── Provider change → update model options & key field ──
@@ -433,6 +459,7 @@ function setupWidget(widget: HTMLElement) {
   // ── Toggle modal ──
   function handleToggle() {
     safeModal.classList.toggle("chat-open")
+    chatIsOpen = safeModal.classList.contains("chat-open")
   }
   toggleBtn.addEventListener("click", handleToggle)
   window.addCleanup(() => toggleBtn.removeEventListener("click", handleToggle))
@@ -440,6 +467,7 @@ function setupWidget(widget: HTMLElement) {
   // ── Close ──
   function handleClose() {
     safeModal.classList.remove("chat-open")
+    chatIsOpen = false
   }
   closeBtn?.addEventListener("click", handleClose)
   window.addCleanup(() => closeBtn?.removeEventListener("click", handleClose))
