@@ -5,7 +5,13 @@
   bottom: 24px;
   right: 24px;
   z-index: 9999;
-  font-family: var(--bodyFont, -apple-system, BlinkMacSystemFont, "Inter", sans-serif);
+  font-family: var(
+    --bodyFont,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Inter",
+    sans-serif
+  );
 }
 
 // --- Floating toggle button ---
@@ -22,7 +28,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
   position: relative;
 
   &:hover {
@@ -66,7 +74,9 @@
   transform: translateY(12px) scale(0.97);
   opacity: 0;
   pointer-events: none;
-  transition: transform 0.2s ease, opacity 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    opacity 0.2s ease;
 
   &.chat-open {
     transform: translateY(0) scale(1);
@@ -321,7 +331,9 @@
   font-size: 12px;
   cursor: pointer;
   margin-top: 8px;
-  transition: background 0.15s, color 0.15s;
+  transition:
+    background 0.15s,
+    color 0.15s;
   font-family: inherit;
 
   &:hover {
@@ -456,12 +468,22 @@
   }
 
   &.user-message .msg-bubble {
-    background: var(--secondary);
+    background: #34aeff;
     color: #fff;
     border-bottom-right-radius: 4px;
 
+    p,
+    span,
+    li,
+    strong,
+    em,
+    br {
+      color: #fff;
+    }
+
     code {
       background: rgba(255, 255, 255, 0.2);
+      color: #fff;
     }
 
     a {
