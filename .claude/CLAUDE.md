@@ -132,6 +132,31 @@ content/
 
 ---
 
+## 💬 Chat RAG — Vibe Codinho
+
+O projeto possui um assistente de chat conversacional integrado ao Quartz chamado **Vibe Codinho**. Ele usa RAG (Retrieval-Augmented Generation) com os arquivos de `content/` como base de conhecimento.
+
+- Regras completas de negócio: veja @.claude/rules/chat-rules.md
+- Agente especializado: `chat-rag-builder` (`.claude/agents/chat-rag-builder.md`)
+- Skill de implementação: `/implement-chat-widget`
+
+### Componentes do sistema
+
+| Arquivo | Função |
+|---|---|
+| `scripts/build-chat-index.mjs` | Gera `public/search-chunks.json` no build |
+| `quartz/components/ChatWidget.tsx` | Widget flutuante de chat (Preact) |
+| `public/search-chunks.json` | Índice de chunks para retrieval |
+
+### Regras rápidas
+
+- Copilot-codex **fora** do índice
+- API key sempre no `localStorage`, nunca no código
+- Respostas sempre em PT-BR (hardcoded no system prompt)
+- Index regenera automaticamente a cada `npx quartz build`
+
+---
+
 ## 🔄 Workflows
 
 - Regras de edição de conteúdo: veja @.claude/rules/content-rules.md
