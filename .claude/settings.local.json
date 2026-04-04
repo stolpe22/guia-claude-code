@@ -8,7 +8,9 @@
       "Bash(pkill -f \"quartz build\")",
       "Bash(kill 25471)",
       "Bash(echo \"PID: $!\")",
-      "Bash(python3:*)"
+      "Bash(python3:*)",
+      "Bash(node:*)",
+      "Bash(curl -s http://localhost:8080)"
     ]
   }
 }

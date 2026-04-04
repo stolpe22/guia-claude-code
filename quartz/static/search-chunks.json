@@ -1,0 +1,1473 @@
+[
+  {
+    "id": "claude-code/00-mindset-sdd#00-mindset-sdd",
+    "title": "00 🧠 Mindset & SDD",
+    "section": "00 🧠 Mindset & SDD",
+    "content": "FASE 0: Mindset Shift e Spec Driven Development (SDD) README · 01-isolamento-devcontainer --- A Regra de Ouro: A IA não adivinha regras de negócio. O código de produção só deve ser gerado após a aprovação de uma especificação rigorosa escrita por um humano.",
+    "url": "/claude-code/00-mindset-sdd",
+    "tags": [
+      "claude-code",
+      "sdd",
+      "mindset",
+      "especificacao",
+      "design-upfront"
+    ]
+  },
+  {
+    "id": "claude-code/00-mindset-sdd#o-engenheiro-como-comandante",
+    "title": "00 🧠 Mindset & SDD",
+    "section": "O Engenheiro como Comandante",
+    "content": "Escrever código linha a linha é passado. O foco agora é orquestração, arquitetura e segurança. Você não \"digita\" mais; você especifica, delega para a frota de subagentes e atua como o Gatekeeper (revisor final) garantindo a excelência técnica.",
+    "url": "/claude-code/00-mindset-sdd",
+    "tags": [
+      "claude-code",
+      "sdd",
+      "mindset",
+      "especificacao",
+      "design-upfront"
+    ]
+  },
+  {
+    "id": "claude-code/00-mindset-sdd#spec-driven-development-sdd-design-upfro",
+    "title": "00 🧠 Mindset & SDD",
+    "section": "Spec Driven Development (SDD) & Design Upfront",
+    "content": "Antes de abrir o terminal para o Claude Code, o líder técnico precisa definir os \"trilhos\". Se a IA tiver que tomar decisões arquiteturais do zero, ocorrerá o Vibe Coding (tentativa e erro descontrolada). O Arquivo Crie o hábito de escrever um documento de especificação (PRD/Spec) para cada nova feature complexa. A IA lerá este documento para implementar a solução exata. Copie de no repositório O que uma Spec deve conter: 1. Regras de Negócio: O que o sistema deve fazer e o que não deve fazer. 2. Contratos de Dados (Interfaces): Esquemas de entrada e saída (JSONs esperados, Pydantic models). 3. Casos de Borda (Edge Cases): Como tratar erros e limites. 4. Decoupling (Separação de UI): Backend (APIs) deve ser agnóstico. A UI é delegada para outro processo.",
+    "url": "/claude-code/00-mindset-sdd",
+    "tags": [
+      "claude-code",
+      "sdd",
+      "mindset",
+      "especificacao",
+      "design-upfront"
+    ]
+  },
+  {
+    "id": "claude-code/00-mindset-sdd#tdd-como-guard-rail-da-ia",
+    "title": "00 🧠 Mindset & SDD",
+    "section": "TDD como Guard Rail da IA",
+    "content": "O Test-Driven Development deixa de ser apenas uma boa prática e vira um limite de segurança (Guard Rail). 1. O humano passa a para a IA. 2. O agente gera os testes antes do código. 3. Você revisa os testes. 4. O Claude implementa o código até os testes passarem. Isso impede que a IA alucine funcionalidades extras ou fuja do escopo estabelecido.",
+    "url": "/claude-code/00-mindset-sdd",
+    "tags": [
+      "claude-code",
+      "sdd",
+      "mindset",
+      "especificacao",
+      "design-upfront"
+    ]
+  },
+  {
+    "id": "claude-code/01-isolamento-devcontainer#01-isolamento-dev-container",
+    "title": "01 🐳 Isolamento (Dev Container)",
+    "section": "01 🐳 Isolamento (Dev Container)",
+    "content": "FASE 1: Isolamento de Segurança (Dev Container) README · 02-cerebro-knowledge-bases --- Princípio fundamental: Nunca rode a IA diretamente no seu sistema operacional raiz. O contêiner Docker cria uma barreira física entre o Claude Code e seus arquivos pessoais, credenciais SSH, variáveis de ambiente etc.",
+    "url": "/claude-code/01-isolamento-devcontainer",
+    "tags": [
+      "claude-code",
+      "devcontainer",
+      "seguranca",
+      "docker",
+      "firewall"
+    ]
+  },
+  {
+    "id": "claude-code/01-isolamento-devcontainer#pré-requisitos",
+    "title": "01 🐳 Isolamento (Dev Container)",
+    "section": "Pré-requisitos",
+    "content": "1. Instale o Docker Desktop e garanta que está rodando 2. Abra o VS Code 3. Extensões → pesquise \"Dev Containers\" (Microsoft) → Install",
+    "url": "/claude-code/01-isolamento-devcontainer",
+    "tags": [
+      "claude-code",
+      "devcontainer",
+      "seguranca",
+      "docker",
+      "firewall"
+    ]
+  },
+  {
+    "id": "claude-code/01-isolamento-devcontainer#os-3-arquivos-obrigatórios",
+    "title": "01 🐳 Isolamento (Dev Container)",
+    "section": "Os 3 Arquivos Obrigatórios",
+    "content": "Crie a pasta na raiz do projeto. Dentro dela, 3 arquivos. Todos podem ser copiados do repo oficial da Anthropic. Arquivo 1: 📦 Fonte oficial · Copie de no repositório O que faz: Imagem (Debian) como base Instala , , , — essenciais pro firewall Instala , , , , + Powerlevel10k Roda como usuário não-root () Instala globalmente Configura para que apenas o script de firewall rode como root --- Arquivo 2: 📦 Fonte oficial · Copie de no repositório Detalhes de segurança: | Configuração | O que protege | |---|---| | | Permite configurar firewall via dentro do container | | com | Container só vê a pasta do projeto. Zero acesso a , , | | com | Histórico e config do Claude ficam em volumes Docker isolados | | | Roda como não-root | | | Firewall ativo antes de qualquer interação | --- Arquivo 3: 📦 Fonte oficial · Copie de no repositório Whitelist do firewall: | Domínio | Razão | |---|---| | IPs do GitHub (web, api, git) | git push/pull e GitHub API | | | API do Claude (obrigatório) | | | Pacotes npm | | / | Telemetria Claude | | | Relatórios de erro | | | Extensões VS Code | | Rede local Docker | Comunicação VS Code ↔ Container | Tudo fora dessa lista = BLOQUEADO. ---",
+    "url": "/claude-code/01-isolamento-devcontainer",
+    "tags": [
+      "claude-code",
+      "devcontainer",
+      "seguranca",
+      "docker",
+      "firewall"
+    ]
+  },
+  {
+    "id": "claude-code/01-isolamento-devcontainer#como-abrir-o-container",
+    "title": "01 🐳 Isolamento (Dev Container)",
+    "section": "Como Abrir o Container",
+    "content": "1. VS Code → canto inferior esquerdo → ícone (verde/azul) 2. Clique → \"Reopen in Container\" 3. Aguarde o build. Pronto — terminal isolado e com firewall ativo. ---",
+    "url": "/claude-code/01-isolamento-devcontainer",
+    "tags": [
+      "claude-code",
+      "devcontainer",
+      "seguranca",
+      "docker",
+      "firewall"
+    ]
+  },
+  {
+    "id": "claude-code/01-isolamento-devcontainer#alternativa-simplificada-sem-firewall",
+    "title": "01 🐳 Isolamento (Dev Container)",
+    "section": "Alternativa Simplificada (sem firewall)",
+    "content": "Se não precisa do firewall, use apenas a Dev Container Feature: ⚠️ Essa versão NÃO inclui firewall. Para segurança máxima, use os 3 arquivos completos. --- README · 02-cerebro-knowledge-bases",
+    "url": "/claude-code/01-isolamento-devcontainer",
+    "tags": [
+      "claude-code",
+      "devcontainer",
+      "seguranca",
+      "docker",
+      "firewall"
+    ]
+  },
+  {
+    "id": "claude-code/02-cerebro-knowledge-bases#02-cérebro-e-knowledge-bases",
+    "title": "02 🧠 Cérebro e Knowledge Bases",
+    "section": "02 🧠 Cérebro e Knowledge Bases",
+    "content": "FASE 2: O Cérebro do Projeto e Bases de Conhecimento 01-isolamento-devcontainer · README · 03-frota-subagentes --- Para que a IA não faça \"Vibe Coding\" (gerar código sem rumo), ela precisa de contexto.",
+    "url": "/claude-code/02-cerebro-knowledge-bases",
+    "tags": [
+      "claude-code",
+      "claude-md",
+      "knowledge-base",
+      "memoria",
+      "mcp",
+      "contexto",
+      "sdd"
+    ]
+  },
+  {
+    "id": "claude-code/02-cerebro-knowledge-bases#o-arquivo-claudemd",
+    "title": "02 🧠 Cérebro e Knowledge Bases",
+    "section": "O Arquivo `CLAUDE.md`",
+    "content": "Na raiz do seu projeto, crie . É lido automaticamente pelo Claude Code no início de cada sessão. CLAUDE `markdown Regras do Projeto",
+    "url": "/claude-code/02-cerebro-knowledge-bases",
+    "tags": [
+      "claude-code",
+      "claude-md",
+      "knowledge-base",
+      "memoria",
+      "mcp",
+      "contexto",
+      "sdd"
+    ]
+  },
+  {
+    "id": "claude-code/02-cerebro-knowledge-bases#arquitetura",
+    "title": "02 🧠 Cérebro e Knowledge Bases",
+    "section": "Arquitetura",
+    "content": "Backend: FastAPI com Python 3.12 Banco de Dados: PostgreSQL 16 via SQLAlchemy 2.0 (async) Frontend: Next.js 14 com TypeScript strict Autenticação: JWT + OAuth2",
+    "url": "/claude-code/02-cerebro-knowledge-bases",
+    "tags": [
+      "claude-code",
+      "claude-md",
+      "knowledge-base",
+      "memoria",
+      "mcp",
+      "contexto",
+      "sdd"
+    ]
+  },
+  {
+    "id": "claude-code/02-cerebro-knowledge-bases#convenções-de-código",
+    "title": "02 🧠 Cérebro e Knowledge Bases",
+    "section": "Convenções de Código",
+    "content": "Sempre use tipagem estrita (mypy strict mode) Docstrings em Google Style para toda função pública Testes com pytest; cobertura mínima de 80% Nunca armazene senhas em texto puro — use bcrypt",
+    "url": "/claude-code/02-cerebro-knowledge-bases",
+    "tags": [
+      "claude-code",
+      "claude-md",
+      "knowledge-base",
+      "memoria",
+      "mcp",
+      "contexto",
+      "sdd"
+    ]
+  },
+  {
+    "id": "claude-code/02-cerebro-knowledge-bases#padrões-de-segurança",
+    "title": "02 🧠 Cérebro e Knowledge Bases",
+    "section": "Padrões de Segurança",
+    "content": "Validação de input com Pydantic v2 Rate limiting em todos os endpoints públicos CORS restrito aos domínios de produção Variáveis sensíveis apenas via variáveis de ambiente",
+    "url": "/claude-code/02-cerebro-knowledge-bases",
+    "tags": [
+      "claude-code",
+      "claude-md",
+      "knowledge-base",
+      "memoria",
+      "mcp",
+      "contexto",
+      "sdd"
+    ]
+  },
+  {
+    "id": "claude-code/02-cerebro-knowledge-bases#git",
+    "title": "02 🧠 Cérebro e Knowledge Bases",
+    "section": "Git",
+    "content": "Conventional Commits (feat:, fix:, docs:) PRs precisam de pelo menos 1 review Branch principal: main README.md` de arquitetura antes de iniciar qualquer desenvolvimento. O Claude lê ambos. ---",
+    "url": "/claude-code/02-cerebro-knowledge-bases",
+    "tags": [
+      "claude-code",
+      "claude-md",
+      "knowledge-base",
+      "memoria",
+      "mcp",
+      "contexto",
+      "sdd"
+    ]
+  },
+  {
+    "id": "claude-code/02-cerebro-knowledge-bases#hierarquia-completa-do-claudemd",
+    "title": "02 🧠 Cérebro e Knowledge Bases",
+    "section": "Hierarquia Completa do `CLAUDE.md`",
+    "content": "Não existe apenas um — há 4 camadas, lidas e combinadas automaticamente: Precedência: subpastas sobrescrevem a raiz, que sobrescreve o global. — Mantendo o CLAUDE.md Modular Em vez de um arquivo monolítico, importe arquivos específicos: O Claude lê todos os arquivos importados como se fossem parte do . Mantenha cada arquivo focado em um tema — arquitetura, convenções, segurança, etc. O Global Use para regras que se aplicam a todos os seus projetos: `markdown <!-- /.claude/CLAUDE.md -->",
+    "url": "/claude-code/02-cerebro-knowledge-bases",
+    "tags": [
+      "claude-code",
+      "claude-md",
+      "knowledge-base",
+      "memoria",
+      "mcp",
+      "contexto",
+      "sdd"
+    ]
+  },
+  {
+    "id": "claude-code/02-cerebro-knowledge-bases#regras-pessoais-globais",
+    "title": "02 🧠 Cérebro e Knowledge Bases",
+    "section": "Regras Pessoais Globais",
+    "content": "Sempre responda em português do Brasil Nunca use em TypeScript sem comentário explicativo Prefira soluções simples a abstrações prematuras Em caso de dúvida arquitetural, pergunte antes de implementar Conventional Commits em todos os projetos ` ---",
+    "url": "/claude-code/02-cerebro-knowledge-bases",
+    "tags": [
+      "claude-code",
+      "claude-md",
+      "knowledge-base",
+      "memoria",
+      "mcp",
+      "contexto",
+      "sdd"
+    ]
+  },
+  {
+    "id": "claude-code/02-cerebro-knowledge-bases#bases-de-conhecimento-memory",
+    "title": "02 🧠 Cérebro e Knowledge Bases",
+    "section": "Bases de Conhecimento (Memory)",
+    "content": "Método 1: Local (Nativo do Claude Code) O campo no YAML do agente controla onde a memória é persistida: | Escopo | Onde salva | Compartilhado com | |---|---|---| | | | Todo o time (vai pro Git) | | | | Só você, em todos os projetos | | Sem | — | Sem persistência entre sessões | Quando configurado, o Claude cria automaticamente: A IA acumula aprendizados entre sessões: Padrões do código que funcionam Erros comuns e como evitá-los Decisões arquiteturais tomadas Preferências do time Não precisa configurar nada além do campo . Veja a 03-frota-subagentes para uso nos agentes. Gerenciando a Memória Manualmente Método 2: Externo (via MCP + Banco Vetorial) Para conhecimentos massivos (documentação privada da empresa, RFCs, Confluence etc.): Passo a passo: 1. Scraping: Use N8N (ou scripts customizados) para raspar docs, wikis, Confluence, Notion etc. 2. Vetorização: Salve tudo num Banco de Dados Vetorial (Supabase pgvector, Qdrant, Pinecone, Weaviate) 3. Conexão MCP: No YAML do subagente, configure: Assim seus agentes consultam toda a base de conhecimento da empresa em tempo real. --- 01-isolamento-devcontainer · README · 03-frota-subagentes",
+    "url": "/claude-code/02-cerebro-knowledge-bases",
+    "tags": [
+      "claude-code",
+      "claude-md",
+      "knowledge-base",
+      "memoria",
+      "mcp",
+      "contexto",
+      "sdd"
+    ]
+  },
+  {
+    "id": "claude-code/03-frota-subagentes#03-frota-de-subagentes",
+    "title": "03 🤖 Frota de Subagentes",
+    "section": "03 🤖 Frota de Subagentes",
+    "content": "FASE 3: Criando a Frota de Subagentes Especializados 02-cerebro-knowledge-bases · README · 04-hooks-seguranca --- Subagentes rodam em janelas de contexto independentes, possuem ferramentas restritas e permitem desenvolvimento agêntico avançado.",
+    "url": "/claude-code/03-frota-subagentes",
+    "tags": [
+      "claude-code",
+      "subagentes",
+      "agentes",
+      "ferramentas",
+      "guard-rails"
+    ]
+  },
+  {
+    "id": "claude-code/03-frota-subagentes#estrutura-de-pastas",
+    "title": "03 🤖 Frota de Subagentes",
+    "section": "Estrutura de Pastas",
+    "content": "Agentes de projeto: (raiz do projeto, vai pro Git) Agentes globais: (disponíveis em todos os projetos da máquina)",
+    "url": "/claude-code/03-frota-subagentes",
+    "tags": [
+      "claude-code",
+      "subagentes",
+      "agentes",
+      "ferramentas",
+      "guard-rails"
+    ]
+  },
+  {
+    "id": "claude-code/03-frota-subagentes#anatomia-de-um-agente",
+    "title": "03 🤖 Frota de Subagentes",
+    "section": "Anatomia de um Agente",
+    "content": "Ferramentas disponíveis: | Ferramenta | O que faz | |---|---| | | Lê conteúdo de arquivos | | | Cria/sobrescreve arquivos | | | Edita partes de arquivos existentes | | | Busca por padrão em arquivos | | | Lista arquivos por padrão (ex: ) | | | Executa comandos no terminal | ---",
+    "url": "/claude-code/03-frota-subagentes",
+    "tags": [
+      "claude-code",
+      "subagentes",
+      "agentes",
+      "ferramentas",
+      "guard-rails"
+    ]
+  },
+  {
+    "id": "claude-code/03-frota-subagentes#agentes-prontos",
+    "title": "03 🤖 Frota de Subagentes",
+    "section": "Agentes Prontos",
+    "content": "🔍 Code Reviewer (Gatekeeper) code-reviewer ⚠️ = se tentar escrever → bloqueado. 🏗️ Architect architect 🧪 Test Writer test-writer 🗄️ DB Reader (com Hook de segurança) db-reader — Veja a 04-hooks-seguranca para o hook de segurança. ---",
+    "url": "/claude-code/03-frota-subagentes",
+    "tags": [
+      "claude-code",
+      "subagentes",
+      "agentes",
+      "ferramentas",
+      "guard-rails"
+    ]
+  },
+  {
+    "id": "claude-code/03-frota-subagentes#criando-agentes-via-terminal-alternativa",
+    "title": "03 🤖 Frota de Subagentes",
+    "section": "Criando Agentes via Terminal (Alternativa)",
+    "content": "Sem criar arquivo na mão: 1. Abra o terminal no VS Code (dentro do container) 2. Digite 3. Digite 4. Menu interativo: escolha escopo, ferramentas, descrição 5. O Claude gera o sozinho --- 02-cerebro-knowledge-bases · README · 04-hooks-seguranca",
+    "url": "/claude-code/03-frota-subagentes",
+    "tags": [
+      "claude-code",
+      "subagentes",
+      "agentes",
+      "ferramentas",
+      "guard-rails"
+    ]
+  },
+  {
+    "id": "claude-code/04-hooks-seguranca#04-hooks-de-segurança",
+    "title": "04 🔒 Hooks de Segurança",
+    "section": "04 🔒 Hooks de Segurança",
+    "content": "FASE 4: Scripts de Segurança Ativa (Hooks) 03-frota-subagentes · README · 05-orquestracao-pratica --- Para agentes com acesso ao terminal () que precisam ser limitados. Ex: agente de banco de dados que só pode , nunca .",
+    "url": "/claude-code/04-hooks-seguranca",
+    "tags": [
+      "claude-code",
+      "hooks",
+      "seguranca",
+      "bash",
+      "guard-rails",
+      "pre-tool-use",
+      "banco-de-dados"
+    ]
+  },
+  {
+    "id": "claude-code/04-hooks-seguranca#o-script-de-validação",
+    "title": "04 🔒 Hooks de Segurança",
+    "section": "O Script de Validação",
+    "content": "Copie de no repositório Crie em : Torne executável:",
+    "url": "/claude-code/04-hooks-seguranca",
+    "tags": [
+      "claude-code",
+      "hooks",
+      "seguranca",
+      "bash",
+      "guard-rails",
+      "pre-tool-use",
+      "banco-de-dados"
+    ]
+  },
+  {
+    "id": "claude-code/04-hooks-seguranca#códigos-de-saída",
+    "title": "04 🔒 Hooks de Segurança",
+    "section": "Códigos de Saída",
+    "content": "| Exit Code | Significado | |---|---| | | Comando liberado — pode executar | | | Comando bloqueado — não executa, mostra mensagem de erro |",
+    "url": "/claude-code/04-hooks-seguranca",
+    "tags": [
+      "claude-code",
+      "hooks",
+      "seguranca",
+      "bash",
+      "guard-rails",
+      "pre-tool-use",
+      "banco-de-dados"
+    ]
+  },
+  {
+    "id": "claude-code/04-hooks-seguranca#exemplos-de-hooks-customizados",
+    "title": "04 🔒 Hooks de Segurança",
+    "section": "Exemplos de Hooks Customizados",
+    "content": "Bloquear Bloquear acesso a diretórios sensíveis ---",
+    "url": "/claude-code/04-hooks-seguranca",
+    "tags": [
+      "claude-code",
+      "hooks",
+      "seguranca",
+      "bash",
+      "guard-rails",
+      "pre-tool-use",
+      "banco-de-dados"
+    ]
+  },
+  {
+    "id": "claude-code/04-hooks-seguranca#onde-configurar-hooks",
+    "title": "04 🔒 Hooks de Segurança",
+    "section": "Onde Configurar Hooks",
+    "content": "Os hooks da Fase 4 mostram configuração inline no YAML do agente. Mas a forma mais robusta é via : Isso aplica o hook a todos os agentes do projeto, não só ao . Veja a 06-settings-permissoes para configuração completa do e a 07-hooks-avancados para os outros 4 tipos de hook além do . --- 03-frota-subagentes · README · 05-orquestracao-pratica",
+    "url": "/claude-code/04-hooks-seguranca",
+    "tags": [
+      "claude-code",
+      "hooks",
+      "seguranca",
+      "bash",
+      "guard-rails",
+      "pre-tool-use",
+      "banco-de-dados"
+    ]
+  },
+  {
+    "id": "claude-code/05-orquestracao-pratica#05-orquestração-prática",
+    "title": "05 🎯 Orquestração Prática",
+    "section": "05 🎯 Orquestração Prática",
+    "content": "FASE 5: Comandando a Frota (Orquestração Prática) 04-hooks-seguranca · README · 06-settings-permissoes --- Agora você é o Comandante. Código e infraestrutura configurados.",
+    "url": "/claude-code/05-orquestracao-pratica",
+    "tags": [
+      "claude-code",
+      "orquestracao",
+      "agentes",
+      "terminal",
+      "slash-commands",
+      "tdd",
+      "fluxo-de-trabalho"
+    ]
+  },
+  {
+    "id": "claude-code/05-orquestracao-pratica#iniciando",
+    "title": "05 🎯 Orquestração Prática",
+    "section": "Iniciando",
+    "content": "1. Abra o terminal no VS Code (dentro do Dev Container) 2. Digite e aperte Enter",
+    "url": "/claude-code/05-orquestracao-pratica",
+    "tags": [
+      "claude-code",
+      "orquestracao",
+      "agentes",
+      "terminal",
+      "slash-commands",
+      "tdd",
+      "fluxo-de-trabalho"
+    ]
+  },
+  {
+    "id": "claude-code/05-orquestracao-pratica#3-formas-de-invocar-agentes",
+    "title": "05 🎯 Orquestração Prática",
+    "section": "3 Formas de Invocar Agentes",
+    "content": "1. Linguagem Natural Simplesmente escreva no prompt: O Claude Code delega automaticamente. 2. Menção Direta (@) Digite no terminal do Claude Code → menu suspenso (typeahead) → selecione o agente: 3. Sessão Dedicada Abre um terminal 100% focado naquele agente: Tudo que você digitar nesse terminal vai rodar com as restrições e ferramentas daquele agente. ---",
+    "url": "/claude-code/05-orquestracao-pratica",
+    "tags": [
+      "claude-code",
+      "orquestracao",
+      "agentes",
+      "terminal",
+      "slash-commands",
+      "tdd",
+      "fluxo-de-trabalho"
+    ]
+  },
+  {
+    "id": "claude-code/05-orquestracao-pratica#trabalho-paralelo-aceleração-exponencial",
+    "title": "05 🎯 Orquestração Prática",
+    "section": "Trabalho Paralelo (Aceleração Exponencial)",
+    "content": "A grande vantagem: múltiplos terminais simultâneos. Como fazer: 1. No VS Code, clique no no painel de terminal 2. Ou use para dividir o terminal 3. Cada terminal = um agente independente 4. Você coordena os resultados ---",
+    "url": "/claude-code/05-orquestracao-pratica",
+    "tags": [
+      "claude-code",
+      "orquestracao",
+      "agentes",
+      "terminal",
+      "slash-commands",
+      "tdd",
+      "fluxo-de-trabalho"
+    ]
+  },
+  {
+    "id": "claude-code/05-orquestracao-pratica#comandos-cli",
+    "title": "05 🎯 Orquestração Prática",
+    "section": "Comandos CLI",
+    "content": "| Comando | O que faz | |---|---| | | Inicia o Claude Code | | | Inicia com agente específico | | | Retoma a sessão mais recente | | | Retoma sessão específica por ID | | | Lista sessões disponíveis para retomar | | | Modo não-interativo (CI/CD) | | | Interrompe a execução atual |",
+    "url": "/claude-code/05-orquestracao-pratica",
+    "tags": [
+      "claude-code",
+      "orquestracao",
+      "agentes",
+      "terminal",
+      "slash-commands",
+      "tdd",
+      "fluxo-de-trabalho"
+    ]
+  },
+  {
+    "id": "claude-code/05-orquestracao-pratica#slash-commands-nativos",
+    "title": "05 🎯 Orquestração Prática",
+    "section": "Slash Commands Nativos",
+    "content": "| Comando | O que faz | |---|---| | | Lista todos os comandos disponíveis | | | Menu interativo para criar/gerenciar agentes | | | Lista servidores MCP conectados e ferramentas | | | Ver e editar a memória persistente da sessão | | | Exibe o que o agente atual pode/não pode fazer | | | Modelo em uso, tokens consumidos, custo estimado | | | Custo detalhado da sessão em tokens e USD | | | Compacta o histórico para economizar tokens | | | Limpa o contexto sem encerrar a sessão | | | Diagnóstico da instalação do Claude Code | | | Menciona e invoca agente inline | Dica: Use em sessões longas antes de mudar de contexto (ex: de backend para frontend). O Claude mantém um resumo denso e libera tokens. ---",
+    "url": "/claude-code/05-orquestracao-pratica",
+    "tags": [
+      "claude-code",
+      "orquestracao",
+      "agentes",
+      "terminal",
+      "slash-commands",
+      "tdd",
+      "fluxo-de-trabalho"
+    ]
+  },
+  {
+    "id": "claude-code/05-orquestracao-pratica#resumo-visual",
+    "title": "05 🎯 Orquestração Prática",
+    "section": "Resumo Visual",
+    "content": "--- 04-hooks-seguranca · README · 06-settings-permissoes",
+    "url": "/claude-code/05-orquestracao-pratica",
+    "tags": [
+      "claude-code",
+      "orquestracao",
+      "agentes",
+      "terminal",
+      "slash-commands",
+      "tdd",
+      "fluxo-de-trabalho"
+    ]
+  },
+  {
+    "id": "claude-code/06-settings-permissoes#06-settings-e-permissões",
+    "title": "06 ⚙️ Settings e Permissões",
+    "section": "06 ⚙️ Settings e Permissões",
+    "content": "FASE 6: settings.json — Configuração Global e Permissões 05-orquestracao-pratica · README · 07-hooks-avancados --- O é o painel de controle central do Claude Code. Mais poderoso que hooks inline nos agentes, ele define permissões, hooks globais e comportamentos padrão de toda a instalação.",
+    "url": "/claude-code/06-settings-permissoes",
+    "tags": [
+      "claude-code",
+      "settings",
+      "permissoes",
+      "configuracao",
+      "hooks",
+      "seguranca"
+    ]
+  },
+  {
+    "id": "claude-code/06-settings-permissoes#dois-níveis-de-configuração",
+    "title": "06 ⚙️ Settings e Permissões",
+    "section": "Dois Níveis de Configuração",
+    "content": "A hierarquia de precedência (maior sobrescreve menor): ---",
+    "url": "/claude-code/06-settings-permissoes",
+    "tags": [
+      "claude-code",
+      "settings",
+      "permissoes",
+      "configuracao",
+      "hooks",
+      "seguranca"
+    ]
+  },
+  {
+    "id": "claude-code/06-settings-permissoes#seção-permissions",
+    "title": "06 ⚙️ Settings e Permissões",
+    "section": "Seção `permissions`",
+    "content": "A forma mais simples de restringir ferramentas — sem escrever scripts. Lista de ferramentas e padrões sempre aprovados automaticamente (sem pedir confirmação): Lista de ferramentas e padrões sempre bloqueados, sem exceção: Sintaxe dos padrões | Padrão | Significa | |---|---| | | Qualquer comando Bash | | | Bash começando com | | | Leitura de qualquer arquivo | | | Escrita dentro de | | | Edição de arquivos Markdown | ⚠️ tem precedência sobre . Se um padrão aparece nos dois, é bloqueado. ---",
+    "url": "/claude-code/06-settings-permissoes",
+    "tags": [
+      "claude-code",
+      "settings",
+      "permissoes",
+      "configuracao",
+      "hooks",
+      "seguranca"
+    ]
+  },
+  {
+    "id": "claude-code/06-settings-permissoes#seção-env",
+    "title": "06 ⚙️ Settings e Permissões",
+    "section": "Seção `env`",
+    "content": "Variáveis de ambiente disponíveis para todos os hooks e agentes da sessão: As variáveis do host () são expandidas automaticamente. ---",
+    "url": "/claude-code/06-settings-permissoes",
+    "tags": [
+      "claude-code",
+      "settings",
+      "permissoes",
+      "configuracao",
+      "hooks",
+      "seguranca"
+    ]
+  },
+  {
+    "id": "claude-code/06-settings-permissoes#estratégia-global-vs-projeto",
+    "title": "06 ⚙️ Settings e Permissões",
+    "section": "Estratégia: Global vs Projeto",
+    "content": "| O que configurar | Onde colocar | |---|---| | Bloqueios de segurança universal (, ) | | | Aprovações automáticas de ferramentas de dev | | | Hooks específicos do projeto (audit log, DB) | | | Variáveis de ambiente do projeto | | | Agentes e skills do projeto | via agentes | Exemplo: settings global recomendado Exemplo: settings de projeto (API backend) ---",
+    "url": "/claude-code/06-settings-permissoes",
+    "tags": [
+      "claude-code",
+      "settings",
+      "permissoes",
+      "configuracao",
+      "hooks",
+      "seguranca"
+    ]
+  },
+  {
+    "id": "claude-code/06-settings-permissoes#comandos-cli-de-configuração",
+    "title": "06 ⚙️ Settings e Permissões",
+    "section": "Comandos CLI de Configuração",
+    "content": "--- 05-orquestracao-pratica · README · 07-hooks-avancados",
+    "url": "/claude-code/06-settings-permissoes",
+    "tags": [
+      "claude-code",
+      "settings",
+      "permissoes",
+      "configuracao",
+      "hooks",
+      "seguranca"
+    ]
+  },
+  {
+    "id": "claude-code/07-hooks-avancados#07-hooks-avançados",
+    "title": "07 🪝 Hooks Avançados",
+    "section": "07 🪝 Hooks Avançados",
+    "content": "FASE 7: 07 🪝 Hooks Avançados 06-settings-permissoes · README · 08-mcp-ferramentas --- A 04-hooks-seguranca cobriu para bloqueio defensivo. Aqui você aprende os outros 4 tipos de hook — para logging, injeção de contexto, notificações e relatórios pós-sessão.",
+    "url": "/claude-code/07-hooks-avancados",
+    "tags": [
+      "claude-code",
+      "hooks",
+      "seguranca",
+      "automacao",
+      "audit-log",
+      "notificacao",
+      "ci-cd"
+    ]
+  },
+  {
+    "id": "claude-code/07-hooks-avancados#-userpromptsubmit-interceptar-o-prompt-d",
+    "title": "07 🪝 Hooks Avançados",
+    "section": "① UserPromptSubmit — Interceptar o Prompt do Usuário",
+    "content": "Dispara antes do prompt chegar ao Claude. Use para: Injetar contexto automático (data, branch atual, env) Bloquear palavras ou padrões proibidos Logar todas as interações Injetar contexto automático Crie : O Claude lê o campo e inclui no raciocínio, sem poluir a conversa. Bloquear prompts com informações sensíveis Configuração no settings.json ---",
+    "url": "/claude-code/07-hooks-avancados",
+    "tags": [
+      "claude-code",
+      "hooks",
+      "seguranca",
+      "automacao",
+      "audit-log",
+      "notificacao",
+      "ci-cd"
+    ]
+  },
+  {
+    "id": "claude-code/07-hooks-avancados#-pretooluse-bloquear-antes-de-executar",
+    "title": "07 🪝 Hooks Avançados",
+    "section": "② PreToolUse — Bloquear Antes de Executar",
+    "content": "Coberto na 04-hooks-seguranca. Resumo dos exit codes: | Exit Code | Efeito | |---|---| | | Libera — ferramenta executa normalmente | | | Bloqueia — ferramenta não executa, mensagem stderr mostrada ao Claude | ---",
+    "url": "/claude-code/07-hooks-avancados",
+    "tags": [
+      "claude-code",
+      "hooks",
+      "seguranca",
+      "automacao",
+      "audit-log",
+      "notificacao",
+      "ci-cd"
+    ]
+  },
+  {
+    "id": "claude-code/07-hooks-avancados#-posttooluse-auditoria-e-validação-pós-e",
+    "title": "07 🪝 Hooks Avançados",
+    "section": "③ PostToolUse — Auditoria e Validação Pós-Execução",
+    "content": "Dispara após a ferramenta executar. Não pode cancelar — serve para logging e ações reativas. Audit log de arquivos escritos Crie : Rodar lint automático após edição Configuração no settings.json ---",
+    "url": "/claude-code/07-hooks-avancados",
+    "tags": [
+      "claude-code",
+      "hooks",
+      "seguranca",
+      "automacao",
+      "audit-log",
+      "notificacao",
+      "ci-cd"
+    ]
+  },
+  {
+    "id": "claude-code/07-hooks-avancados#-notification-alertas-externos",
+    "title": "07 🪝 Hooks Avançados",
+    "section": "④ Notification — Alertas Externos",
+    "content": "Dispara quando o Claude envia uma notificação (ex: \"tarefa concluída\", \"preciso de sua atenção\"). Alerta no Slack Crie : Notificação no terminal (beep + mensagem) Configuração no settings.json ---",
+    "url": "/claude-code/07-hooks-avancados",
+    "tags": [
+      "claude-code",
+      "hooks",
+      "seguranca",
+      "automacao",
+      "audit-log",
+      "notificacao",
+      "ci-cd"
+    ]
+  },
+  {
+    "id": "claude-code/07-hooks-avancados#-stop-relatório-pós-sessão",
+    "title": "07 🪝 Hooks Avançados",
+    "section": "⑤ Stop — Relatório Pós-Sessão",
+    "content": "Dispara quando o Claude termina de responder (fim de cada turno). Use para métricas, relatórios e cleanup. Relatório de sessão Crie : Configuração no settings.json ---",
+    "url": "/claude-code/07-hooks-avancados",
+    "tags": [
+      "claude-code",
+      "hooks",
+      "seguranca",
+      "automacao",
+      "audit-log",
+      "notificacao",
+      "ci-cd"
+    ]
+  },
+  {
+    "id": "claude-code/07-hooks-avancados#settingsjson-com-todos-os-hooks-ativos",
+    "title": "07 🪝 Hooks Avançados",
+    "section": "settings.json com Todos os Hooks Ativos",
+    "content": "Exemplo completo de corporativo: ---",
+    "url": "/claude-code/07-hooks-avancados",
+    "tags": [
+      "claude-code",
+      "hooks",
+      "seguranca",
+      "automacao",
+      "audit-log",
+      "notificacao",
+      "ci-cd"
+    ]
+  },
+  {
+    "id": "claude-code/07-hooks-avancados#tabela-resumo",
+    "title": "07 🪝 Hooks Avançados",
+    "section": "Tabela Resumo",
+    "content": "| Hook | Quando | Pode bloquear? | Uso principal | |---|---|---|---| | | Antes do prompt chegar ao Claude | ✅ exit 2 | Injetar contexto, bloquear credenciais | | | Antes da ferramenta executar | ✅ exit 2 | Bloquear comandos perigosos | | | Após a ferramenta executar | ❌ | Audit log, lint automático | | | Quando Claude notifica | ❌ | Alertas Slack/Discord | | | Fim de cada turno do Claude | ❌ | Métricas, relatórios de sessão | --- 06-settings-permissoes · README · 08-mcp-ferramentas",
+    "url": "/claude-code/07-hooks-avancados",
+    "tags": [
+      "claude-code",
+      "hooks",
+      "seguranca",
+      "automacao",
+      "audit-log",
+      "notificacao",
+      "ci-cd"
+    ]
+  },
+  {
+    "id": "claude-code/08-mcp-ferramentas#08-mcp-e-ferramentas-externas",
+    "title": "08 🔌 MCP e Ferramentas Externas",
+    "section": "08 🔌 MCP e Ferramentas Externas",
+    "content": "FASE 8: MCP — Conectando Ferramentas Externas 07-hooks-avancados · README · 09-skills-slash-commands --- MCP (Model Context Protocol) é o padrão aberto da Anthropic que permite ao Claude Code se conectar a sistemas externos — banco de dados, GitHub, Slack, APIs — como se fossem ferramentas nativas.",
+    "url": "/claude-code/08-mcp-ferramentas",
+    "tags": [
+      "claude-code",
+      "mcp",
+      "integracao",
+      "ferramentas",
+      "github",
+      "postgresql",
+      "slack",
+      "knowledge-base"
+    ]
+  },
+  {
+    "id": "claude-code/08-mcp-ferramentas#o-que-é-mcp",
+    "title": "08 🔌 MCP e Ferramentas Externas",
+    "section": "O que é MCP",
+    "content": "Cada servidor MCP expõe ferramentas que o Claude usa nativamente. É transparente: o Claude chama da mesma forma que chama . ---",
+    "url": "/claude-code/08-mcp-ferramentas",
+    "tags": [
+      "claude-code",
+      "mcp",
+      "integracao",
+      "ferramentas",
+      "github",
+      "postgresql",
+      "slack",
+      "knowledge-base"
+    ]
+  },
+  {
+    "id": "claude-code/08-mcp-ferramentas#onde-configurar",
+    "title": "08 🔌 MCP e Ferramentas Externas",
+    "section": "Onde Configurar",
+    "content": "Os servidores MCP iniciam automaticamente quando você abre o Claude Code. ---",
+    "url": "/claude-code/08-mcp-ferramentas",
+    "tags": [
+      "claude-code",
+      "mcp",
+      "integracao",
+      "ferramentas",
+      "github",
+      "postgresql",
+      "slack",
+      "knowledge-base"
+    ]
+  },
+  {
+    "id": "claude-code/08-mcp-ferramentas#servidores-mcp-essenciais",
+    "title": "08 🔌 MCP e Ferramentas Externas",
+    "section": "Servidores MCP Essenciais",
+    "content": "🐙 GitHub Lê e interage com repositórios, PRs, issues e Actions. Ferramentas disponíveis: Listar/criar/atualizar issues e PRs Ler diffs de commits Pesquisar código no repositório Criar comentários em revisões Como usar: --- 🗄️ PostgreSQL Executa queries diretamente no banco — com controle total de permissões via credenciais. Use um usuário de banco somente-leitura para máxima segurança. Combine com o hook da 04-hooks-seguranca. Como usar: --- 💬 Slack Lê canais, threads e histórico. Pode enviar mensagens (configure com cuidado). Como usar: --- 📁 Filesystem (Acesso Controlado) Expõe diretórios específicos como ferramentas, com controle de escopo mais fino que as ferramentas nativas. Útil para dar acesso a pastas específicas a subagentes com ferramentas nativas restritas. --- 🔍 Brave Search Busca na web sem expor o prompt do usuário ao Google. Como usar: --- 🎭 Puppeteer (Browser Automation) Permite ao Claude navegar em páginas web, tirar screenshots e interagir com UIs. Como usar: --- 🧠 Base de Conhecimento Vetorial (Supabase) Para documentação interna, RFCs, Confluence — a KB da empresa. Veja 02-cerebro-knowledge-bases para o fluxo completo de ingestão de dados (N8N → banco vetorial → MCP). Como usar: ---",
+    "url": "/claude-code/08-mcp-ferramentas",
+    "tags": [
+      "claude-code",
+      "mcp",
+      "integracao",
+      "ferramentas",
+      "github",
+      "postgresql",
+      "slack",
+      "knowledge-base"
+    ]
+  },
+  {
+    "id": "claude-code/08-mcp-ferramentas#mcp-em-subagentes-específicos",
+    "title": "08 🔌 MCP e Ferramentas Externas",
+    "section": "MCP em Subagentes Específicos",
+    "content": "Você pode restringir servidores MCP a agentes específicos — o YAML do agente herda apenas os MCPs que você declarar: ---",
+    "url": "/claude-code/08-mcp-ferramentas",
+    "tags": [
+      "claude-code",
+      "mcp",
+      "integracao",
+      "ferramentas",
+      "github",
+      "postgresql",
+      "slack",
+      "knowledge-base"
+    ]
+  },
+  {
+    "id": "claude-code/08-mcp-ferramentas#onde-encontrar-mais-servidores-mcp",
+    "title": "08 🔌 MCP e Ferramentas Externas",
+    "section": "Onde Encontrar Mais Servidores MCP",
+    "content": "Catálogo oficial: Repositórios oficiais: Servidores da comunidade: Linear, Jira, Notion, Datadog, Sentry, AWS, Kubernetes --- 07-hooks-avancados · README · 09-skills-slash-commands",
+    "url": "/claude-code/08-mcp-ferramentas",
+    "tags": [
+      "claude-code",
+      "mcp",
+      "integracao",
+      "ferramentas",
+      "github",
+      "postgresql",
+      "slack",
+      "knowledge-base"
+    ]
+  },
+  {
+    "id": "claude-code/09-skills-slash-commands#09-skills-e-slash-commands",
+    "title": "09 ⚡ Skills e Slash Commands",
+    "section": "09 ⚡ Skills e Slash Commands",
+    "content": "FASE 9: Skills e Slash Commands 08-mcp-ferramentas · README · 10-ci-cd-nao-interativo --- Skills são slash commands customizados — prompts reutilizáveis que você invoca com . São a forma de padronizar fluxos repetitivos e garantir que toda a equipe execute as mesmas etapas.",
+    "url": "/claude-code/09-skills-slash-commands",
+    "tags": [
+      "claude-code",
+      "skills",
+      "slash-commands",
+      "produtividade",
+      "automacao",
+      "fluxo-de-trabalho"
+    ]
+  },
+  {
+    "id": "claude-code/09-skills-slash-commands#slash-commands-nativos",
+    "title": "09 ⚡ Skills e Slash Commands",
+    "section": "Slash Commands Nativos",
+    "content": "Antes de criar skills customizadas, conheça os nativos: | Comando | O que faz | |---|---| | | Lista todos os comandos disponíveis | | | Menu interativo para criar/gerenciar agentes | | | Lista servidores MCP conectados e suas ferramentas | | | Ver, editar e limpar a memória persistente da sessão | | | Exibe o que o agente atual pode e não pode fazer | | | Modelo em uso, tokens consumidos, custo estimado | | | Custo detalhado da sessão atual em tokens e USD | | | Compacta o histórico para economizar tokens (mantém resumo) | | | Limpa o contexto sem encerrar a sessão | | | Diagnóstico da instalação (versão, autenticação, MCP) | | | Retoma a sessão anterior | Dica: é essencial em sessões longas. O Claude compacta automaticamente quando o contexto chega em 80%, mas você pode acionar antes. ---",
+    "url": "/claude-code/09-skills-slash-commands",
+    "tags": [
+      "claude-code",
+      "skills",
+      "slash-commands",
+      "produtividade",
+      "automacao",
+      "fluxo-de-trabalho"
+    ]
+  },
+  {
+    "id": "claude-code/09-skills-slash-commands#skills-customizadas",
+    "title": "09 ⚡ Skills e Slash Commands",
+    "section": "Skills Customizadas",
+    "content": "Estrutura de Pastas Cada skill é um arquivo — o nome do arquivo vira o comando: Anatomia de uma Skill ---",
+    "url": "/claude-code/09-skills-slash-commands",
+    "tags": [
+      "claude-code",
+      "skills",
+      "slash-commands",
+      "produtividade",
+      "automacao",
+      "fluxo-de-trabalho"
+    ]
+  },
+  {
+    "id": "claude-code/09-skills-slash-commands#skills-prontas-para-usar",
+    "title": "09 ⚡ Skills e Slash Commands",
+    "section": "Skills Prontas para Usar",
+    "content": "📋 /review-pr Revisa o PR atual com foco em segurança, qualidade e testes. Como usar: --- 🚀 /deploy-check Checklist completo antes de um deploy em produção. Como usar: --- 📊 /daily-report Relatório diário de atividade do repositório pronto para Slack. Como usar: --- 🔒 /security-scan Auditoria de segurança completa do repositório. Como usar: --- 🧪 /test-coverage Analisa cobertura e aponta gaps críticos para o 03-frota-subagentes implementar. Como usar: --- 🏗️ /adr Cria um ADR (Architecture Decision Record) formatado. git config user.name`",
+    "url": "/claude-code/09-skills-slash-commands",
+    "tags": [
+      "claude-code",
+      "skills",
+      "slash-commands",
+      "produtividade",
+      "automacao",
+      "fluxo-de-trabalho"
+    ]
+  },
+  {
+    "id": "claude-code/09-skills-slash-commands#alternativas-consideradas",
+    "title": "09 ⚡ Skills e Slash Commands",
+    "section": "Alternativas Consideradas",
+    "content": "Salve em . Consulte para o próximo número. /adr Migrar de REST para GraphQL` ---",
+    "url": "/claude-code/09-skills-slash-commands",
+    "tags": [
+      "claude-code",
+      "skills",
+      "slash-commands",
+      "produtividade",
+      "automacao",
+      "fluxo-de-trabalho"
+    ]
+  },
+  {
+    "id": "claude-code/09-skills-slash-commands#combinando-skills-com-agentes",
+    "title": "09 ⚡ Skills e Slash Commands",
+    "section": "Combinando Skills com Agentes",
+    "content": "Skills invocam o Claude principal, mas você pode direcionar para um agente: ---",
+    "url": "/claude-code/09-skills-slash-commands",
+    "tags": [
+      "claude-code",
+      "skills",
+      "slash-commands",
+      "produtividade",
+      "automacao",
+      "fluxo-de-trabalho"
+    ]
+  },
+  {
+    "id": "claude-code/09-skills-slash-commands#dica-compact-em-sessões-longas",
+    "title": "09 ⚡ Skills e Slash Commands",
+    "section": "Dica: `/compact` em Sessões Longas",
+    "content": "Quando a sessão acumula muito contexto (implementações longas, muitos arquivos lidos): O Claude cria um resumo denso e descarta o histórico bruto. Use antes de: Pedir uma nova feature grande Trocar de contexto (de backend para frontend) Sessões que passam de 1-2 horas --- 08-mcp-ferramentas · README · 10-ci-cd-nao-interativo",
+    "url": "/claude-code/09-skills-slash-commands",
+    "tags": [
+      "claude-code",
+      "skills",
+      "slash-commands",
+      "produtividade",
+      "automacao",
+      "fluxo-de-trabalho"
+    ]
+  },
+  {
+    "id": "claude-code/10-ci-cd-nao-interativo#10-cicd-não-interativo",
+    "title": "10 🔄 CI/CD Não-Interativo",
+    "section": "10 🔄 CI/CD Não-Interativo",
+    "content": "FASE 10: Claude Code em CI/CD (Modo Não-Interativo) 09-skills-slash-commands · README --- Claude Code não é só para uso interativo. Com a flag ele vira uma ferramenta de automação — integrando com pipelines de CI/CD, scripts e GitHub Actions.",
+    "url": "/claude-code/10-ci-cd-nao-interativo",
+    "tags": [
+      "claude-code",
+      "ci-cd",
+      "automacao",
+      "github-actions",
+      "nao-interativo",
+      "shell",
+      "pipeline"
+    ]
+  },
+  {
+    "id": "claude-code/10-ci-cd-nao-interativo#o-modo---print--p",
+    "title": "10 🔄 CI/CD Não-Interativo",
+    "section": "O Modo `--print` / `-p`",
+    "content": "Em modo : Não pede confirmações Não abre interface interativa Retorna o resultado no stdout e encerra Integra naturalmente com pipes Unix ---",
+    "url": "/claude-code/10-ci-cd-nao-interativo",
+    "tags": [
+      "claude-code",
+      "ci-cd",
+      "automacao",
+      "github-actions",
+      "nao-interativo",
+      "shell",
+      "pipeline"
+    ]
+  },
+  {
+    "id": "claude-code/10-ci-cd-nao-interativo#casos-de-uso-práticos",
+    "title": "10 🔄 CI/CD Não-Interativo",
+    "section": "Casos de Uso Práticos",
+    "content": "Revisão automática de diff no push Geração de changelog automático Uso: Análise de cobertura de testes ---",
+    "url": "/claude-code/10-ci-cd-nao-interativo",
+    "tags": [
+      "claude-code",
+      "ci-cd",
+      "automacao",
+      "github-actions",
+      "nao-interativo",
+      "shell",
+      "pipeline"
+    ]
+  },
+  {
+    "id": "claude-code/10-ci-cd-nao-interativo#flag---output-format",
+    "title": "10 🔄 CI/CD Não-Interativo",
+    "section": "Flag `--output-format`",
+    "content": "Controla o formato de saída para parsing programático: Exemplo de saída JSON ---",
+    "url": "/claude-code/10-ci-cd-nao-interativo",
+    "tags": [
+      "claude-code",
+      "ci-cd",
+      "automacao",
+      "github-actions",
+      "nao-interativo",
+      "shell",
+      "pipeline"
+    ]
+  },
+  {
+    "id": "claude-code/10-ci-cd-nao-interativo#gerenciamento-de-sessões",
+    "title": "10 🔄 CI/CD Não-Interativo",
+    "section": "Gerenciamento de Sessões",
+    "content": "Retomar sessão anterior Útil quando uma sessão longa foi interrompida — o Claude retoma o contexto completo. Continuar sessão em modo não-interativo ---",
+    "url": "/claude-code/10-ci-cd-nao-interativo",
+    "tags": [
+      "claude-code",
+      "ci-cd",
+      "automacao",
+      "github-actions",
+      "nao-interativo",
+      "shell",
+      "pipeline"
+    ]
+  },
+  {
+    "id": "claude-code/10-ci-cd-nao-interativo#github-actions",
+    "title": "10 🔄 CI/CD Não-Interativo",
+    "section": "GitHub Actions",
+    "content": "Review automático de PR Geração de release notes ---",
+    "url": "/claude-code/10-ci-cd-nao-interativo",
+    "tags": [
+      "claude-code",
+      "ci-cd",
+      "automacao",
+      "github-actions",
+      "nao-interativo",
+      "shell",
+      "pipeline"
+    ]
+  },
+  {
+    "id": "claude-code/10-ci-cd-nao-interativo#boas-práticas-em-cicd",
+    "title": "10 🔄 CI/CD Não-Interativo",
+    "section": "Boas Práticas em CI/CD",
+    "content": "| Prática | Por quê | |---|---| | Use para parsing | Evita quebrar com mudanças no texto de saída | | Defina timeout nos steps | Sessões longas podem travar o pipeline | | Use como secret | Nunca hardcode no workflow | | Combine com no 06-settings-permissoes\\ | O Claude no CI não precisa de Bash livre | | Prefira saídas curtas e objetivas no prompt | Reduz custo e latência no CI | | Use só em ambientes isolados | Pule confirmações apenas em containers descartáveis | settings.json para CI ---",
+    "url": "/claude-code/10-ci-cd-nao-interativo",
+    "tags": [
+      "claude-code",
+      "ci-cd",
+      "automacao",
+      "github-actions",
+      "nao-interativo",
+      "shell",
+      "pipeline"
+    ]
+  },
+  {
+    "id": "claude-code/10-ci-cd-nao-interativo#resumo-dos-flags-principais",
+    "title": "10 🔄 CI/CD Não-Interativo",
+    "section": "Resumo dos Flags Principais",
+    "content": "| Flag | Uso | |---|---| | / | Modo não-interativo — processa e sai | | | Formato de saída | | | Retoma sessão anterior | | | Retoma sessão específica | | | Lista sessões disponíveis | | | Pula confirmações (só em ambientes isolados) | | | Especifica o modelo (sonnet, opus, haiku) | | | Inicia com subagente específico | --- 09-skills-slash-commands · README",
+    "url": "/claude-code/10-ci-cd-nao-interativo",
+    "tags": [
+      "claude-code",
+      "ci-cd",
+      "automacao",
+      "github-actions",
+      "nao-interativo",
+      "shell",
+      "pipeline"
+    ]
+  },
+  {
+    "id": "claude-code/README#guia-completo-ambiente-claude-code-segur",
+    "title": "Guia Completo: Ambiente Claude Code Seguro",
+    "section": "Guia Completo: Ambiente Claude Code Seguro",
+    "content": "🛡️ Guia Completo: Ambiente Claude Code Seguro Ambiente isolado, com firewall, subagentes especializados, guard rails e metodologias SDD/TDD.",
+    "url": "/claude-code/README",
+    "tags": [
+      "claude-code",
+      "indice",
+      "sdd",
+      "seguranca",
+      "devcontainer",
+      "agentes",
+      "hooks",
+      "mcp",
+      "skills"
+    ]
+  },
+  {
+    "id": "claude-code/README#-repositórios-oficiais-da-anthropic",
+    "title": "Guia Completo: Ambiente Claude Code Seguro",
+    "section": "🔗 Repositórios Oficiais da Anthropic",
+    "content": "| Repo | O que contém | | --------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------- | | anthropics/claude-code/.devcontainer | Dockerfile + firewall + devcontainer.json (setup completo) | | anthropics/devcontainer-features | Dev Container Feature simplificada (sem firewall) | ---",
+    "url": "/claude-code/README",
+    "tags": [
+      "claude-code",
+      "indice",
+      "sdd",
+      "seguranca",
+      "devcontainer",
+      "agentes",
+      "hooks",
+      "mcp",
+      "skills"
+    ]
+  },
+  {
+    "id": "claude-code/README#-fases-do-guia",
+    "title": "Guia Completo: Ambiente Claude Code Seguro",
+    "section": "📚 Fases do Guia",
+    "content": "| # | Fase | Descrição | | --- | ----------------------------------------------------------------------- | ------------------------------------------------------------ | | 0 | 00-mindset-sdd\\ | O Engenheiro como Comandante, SDD e Design Upfront | | 1 | 01-isolamento-devcontainer\\ | Docker + firewall + sandbox — nunca rode IA no host | | 2 | 02-cerebro-knowledge-bases\\ | CLAUDE.md hierárquico, @imports, memória por escopo, MCP | | 3 | 03-frota-subagentes\\ | Agentes especializados com ferramentas restritas | | 4 | 04-hooks-seguranca\\ | Scripts que interceptam e bloqueiam comandos perigosos | | 5 | 05-orquestracao-pratica\\ | Como comandar a frota, slash commands e --resume | | 6 | 06-settings-permissoes\\ | Permissões granulares, deny/allow, variáveis de ambiente | | 7 | 07-hooks-avancados\\ | PostToolUse, UserPromptSubmit, Notification, Stop | | 8 | 08-mcp-ferramentas\\ | GitHub, PostgreSQL, Slack, Brave Search, KB Vetorial | | 9 | 09-skills-slash-commands\\ | Comandos /customizados reutilizáveis por toda a equipe | | 10 | 10-ci-cd-nao-interativo\\ | --print, GitHub Actions, review automático, release notes | ---",
+    "url": "/claude-code/README",
+    "tags": [
+      "claude-code",
+      "indice",
+      "sdd",
+      "seguranca",
+      "devcontainer",
+      "agentes",
+      "hooks",
+      "mcp",
+      "skills"
+    ]
+  },
+  {
+    "id": "claude-code/README#-arquivos-prontos-para-copiar",
+    "title": "Guia Completo: Ambiente Claude Code Seguro",
+    "section": "📁 Arquivos Prontos para Copiar",
+    "content": "Todos os arquivos de configuração estão na pasta . Copie para as pastas corretas: ---",
+    "url": "/claude-code/README",
+    "tags": [
+      "claude-code",
+      "indice",
+      "sdd",
+      "seguranca",
+      "devcontainer",
+      "agentes",
+      "hooks",
+      "mcp",
+      "skills"
+    ]
+  },
+  {
+    "id": "claude-code/README#-checklist-final",
+    "title": "Guia Completo: Ambiente Claude Code Seguro",
+    "section": "✅ Checklist Final",
+    "content": "[ ] Docker Desktop rodando [ ] Extensão \"Dev Containers\" instalada no VS Code [ ] 3 arquivos na [ ] VS Code reaberto no container (\"Reopen in Container\") [ ] Firewall verificado nos logs (\"Firewall verification passed\") [ ] criado com regras do projeto [ ] com regras pessoais globais [ ] com permissões e hooks do projeto [ ] Agentes em com configurados [ ] Skills em para fluxos repetitivos [ ] Hooks em com [ ] Servidores MCP configurados no [ ] Nunca rodar fora do container",
+    "url": "/claude-code/README",
+    "tags": [
+      "claude-code",
+      "indice",
+      "sdd",
+      "seguranca",
+      "devcontainer",
+      "agentes",
+      "hooks",
+      "mcp",
+      "skills"
+    ]
+  },
+  {
+    "id": "claude-code/assets/estrutura-pastas#estrutura-pastas",
+    "title": "estrutura-pastas",
+    "section": "estrutura-pastas",
+    "content": "🛡️ Guia Completo: Ambiente Claude Code Seguro Ambiente isolado, com firewall, subagentes especializados e guard rails.",
+    "url": "/claude-code/assets/estrutura-pastas",
+    "tags": []
+  },
+  {
+    "id": "claude-code/assets/estrutura-pastas#-repositórios-oficiais-da-anthropic",
+    "title": "estrutura-pastas",
+    "section": "🔗 Repositórios Oficiais da Anthropic",
+    "content": "| Repo | O que contém | |---|---| | anthropics/claude-code/.devcontainer | Dockerfile + firewall + devcontainer.json (setup completo) | | anthropics/devcontainer-features | Dev Container Feature simplificada (sem firewall) | ---",
+    "url": "/claude-code/assets/estrutura-pastas",
+    "tags": []
+  },
+  {
+    "id": "claude-code/assets/estrutura-pastas#-fases-do-guia",
+    "title": "estrutura-pastas",
+    "section": "📚 Fases do Guia",
+    "content": "| # | Fase | Descrição | |---|---|---| | 1 | 01-isolamento-devcontainer\\ | Docker + firewall + sandbox — nunca rode IA no host | | 2 | 02-cerebro-knowledge-bases\\ | CLAUDE.md, memória de agentes, MCP com banco vetorial | | 3 | 03-frota-subagentes\\ | Agentes especializados com ferramentas restritas | | 4 | 04-hooks-seguranca\\ | Scripts que interceptam e bloqueiam comandos perigosos | | 5 | 05-orquestracao-pratica\\ | Como comandar a frota no dia a dia | ---",
+    "url": "/claude-code/assets/estrutura-pastas",
+    "tags": []
+  },
+  {
+    "id": "claude-code/assets/estrutura-pastas#-arquivos-prontos-para-copiar",
+    "title": "estrutura-pastas",
+    "section": "📁 Arquivos Prontos para Copiar",
+    "content": "Todos os arquivos de configuração estão na pasta . Copie para as pastas corretas do seu projeto: ---",
+    "url": "/claude-code/assets/estrutura-pastas",
+    "tags": []
+  },
+  {
+    "id": "claude-code/assets/estrutura-pastas#-checklist-final",
+    "title": "estrutura-pastas",
+    "section": "✅ Checklist Final",
+    "content": "[ ] Docker Desktop rodando [ ] Extensão \"Dev Containers\" instalada no VS Code [ ] 3 arquivos na [ ] VS Code reaberto no container (\"Reopen in Container\") [ ] Firewall verificado nos logs (\"Firewall verification passed\") [ ] criado com regras do projeto [ ] Agentes em com configurados [ ] Hooks em com [ ] Nunca rodar fora do container",
+    "url": "/claude-code/assets/estrutura-pastas",
+    "tags": []
+  },
+  {
+    "id": "claude-code/arquivos/CLAUDE#arquitetura",
+    "title": "CLAUDE",
+    "section": "Arquitetura",
+    "content": "Backend: FastAPI com Python 3.12 Banco de Dados: PostgreSQL 16 via SQLAlchemy 2.0 (async) Frontend: Next.js 14 com TypeScript strict Autenticação: JWT + OAuth2",
+    "url": "/claude-code/arquivos/CLAUDE",
+    "tags": []
+  },
+  {
+    "id": "claude-code/arquivos/CLAUDE#convenções-de-código",
+    "title": "CLAUDE",
+    "section": "Convenções de Código",
+    "content": "Sempre use tipagem estrita (mypy strict mode) Docstrings em Google Style para toda função pública Testes com pytest; cobertura mínima de 80% Nunca armazene senhas em texto puro — use bcrypt",
+    "url": "/claude-code/arquivos/CLAUDE",
+    "tags": []
+  },
+  {
+    "id": "claude-code/arquivos/CLAUDE#padrões-de-segurança",
+    "title": "CLAUDE",
+    "section": "Padrões de Segurança",
+    "content": "Validação de input com Pydantic v2 Rate limiting em todos os endpoints públicos CORS restrito aos domínios de produção Variáveis sensíveis apenas via variáveis de ambiente",
+    "url": "/claude-code/arquivos/CLAUDE",
+    "tags": []
+  },
+  {
+    "id": "claude-code/arquivos/CLAUDE#git",
+    "title": "CLAUDE",
+    "section": "Git",
+    "content": "Conventional Commits (feat:, fix:, docs:) PRs precisam de pelo menos 1 review Branch principal: main",
+    "url": "/claude-code/arquivos/CLAUDE",
+    "tags": []
+  },
+  {
+    "id": "claude-code/arquivos/architect#architect",
+    "title": "architect",
+    "section": "architect",
+    "content": "Você é um Arquiteto de Software com 15 anos de experiência. Quando invocado: 1. Analise a estrutura do projeto e dependências. 2. Identifique problemas (acoplamento, responsabilidades, escalabilidade). 3. Proponha melhorias usando ADRs (Architecture Decision Records). 4. Não escreva código — apenas documente decisões e diagramas.",
+    "url": "/claude-code/arquivos/architect",
+    "tags": []
+  },
+  {
+    "id": "claude-code/arquivos/code-reviewer#code-reviewer",
+    "title": "code-reviewer",
+    "section": "code-reviewer",
+    "content": "Você é um Engenheiro de Software Sênior focado em revisão de código. Quando invocado: 1. Rode para ver as alterações recentes. 2. Foque em: - Segurança: criptografia, senhas/tokens vazados, SQL injection - Qualidade: complexidade ciclomática, DRY, SOLID - Testes: cobertura, edge cases 3. NÃO conserte o código. Apenas aponte problemas: - 🔴 Crítico: corrigir antes do merge - 🟡 Avisos: melhorias importantes - 🟢 Sugestões: nice-to-have",
+    "url": "/claude-code/arquivos/code-reviewer",
+    "tags": []
+  },
+  {
+    "id": "claude-code/arquivos/db-reader#db-reader",
+    "title": "db-reader",
+    "section": "db-reader",
+    "content": "Você é um analista de banco de dados com apenas permissão de leitura (SELECT). Regras: 1. Nunca execute INSERT, UPDATE, DELETE, DROP, ALTER, TRUNCATE. 2. Explique o que a query faz antes de executá-la. 3. Formate resultados em tabelas legíveis. 4. Se pedirem escrita, avise que não tem permissão.",
+    "url": "/claude-code/arquivos/db-reader",
+    "tags": []
+  },
+  {
+    "id": "claude-code/arquivos/test-writer#test-writer",
+    "title": "test-writer",
+    "section": "test-writer",
+    "content": "Você é um especialista em testes de software. Quando invocado: 1. Analise o código que precisa de testes. 2. Escreva testes unitários e de integração. 3. Use pytest com fixtures e parametrize. 4. Cubra edge cases, erros de input e condições de contorno. 5. Garanta testes determinísticos e independentes.",
+    "url": "/claude-code/arquivos/test-writer",
+    "tags": []
+  },
+  {
+    "id": "claude-code/arquivos/skills/adr#adr",
+    "title": "adr",
+    "section": "adr",
+    "content": "Crie um ADR para a decisão: $ARGUMENTS Siga o template: ADR-NNN: $ARGUMENTS Status: Proposed Data: (data de hoje) Autores: (branch/usuário atual via )",
+    "url": "/claude-code/arquivos/skills/adr",
+    "tags": []
+  },
+  {
+    "id": "claude-code/arquivos/skills/adr#contexto",
+    "title": "adr",
+    "section": "Contexto",
+    "content": "Descreva o problema ou situação que motivou esta decisão.",
+    "url": "/claude-code/arquivos/skills/adr",
+    "tags": []
+  },
+  {
+    "id": "claude-code/arquivos/skills/adr#decisão",
+    "title": "adr",
+    "section": "Decisão",
+    "content": "Descreva a decisão tomada de forma clara e direta.",
+    "url": "/claude-code/arquivos/skills/adr",
+    "tags": []
+  },
+  {
+    "id": "claude-code/arquivos/skills/adr#consequências",
+    "title": "adr",
+    "section": "Consequências",
+    "content": "Positivas ... Negativas / Trade-offs ...",
+    "url": "/claude-code/arquivos/skills/adr",
+    "tags": []
+  },
+  {
+    "id": "claude-code/arquivos/skills/adr#alternativas-consideradas",
+    "title": "adr",
+    "section": "Alternativas Consideradas",
+    "content": "| Alternativa | Por que foi descartada | |---|---| | ... | ... | Salve em . Incremente o número baseado nos ADRs existentes em (use para verificar). Crie a pasta se não existir.",
+    "url": "/claude-code/arquivos/skills/adr",
+    "tags": []
+  },
+  {
+    "id": "claude-code/arquivos/skills/daily-report#daily-report",
+    "title": "daily-report",
+    "section": "daily-report",
+    "content": "Gere o relatório de atividade do dia: 1. — commits do dia 2. — PRs aguardando review 3. — issues abertas para você 4. — últimas execuções de CI/CD Formate em Markdown pronto para colar no Slack: ✅ O que foi concluído 🔄 Em progresso 🚧 Bloqueios 📋 Próximos passos",
+    "url": "/claude-code/arquivos/skills/daily-report",
+    "tags": []
+  },
+  {
+    "id": "claude-code/arquivos/skills/deploy-check#deploy-check",
+    "title": "deploy-check",
+    "section": "deploy-check",
+    "content": "Execute o checklist de pre-deploy: 1. Testes: — reporte falhas 2. Lint: — reporte erros de tipo 3. Migrations pendentes: — verifique se há migrations não aplicadas 4. Variáveis de ambiente: verifique se tem todas as variáveis do 5. Changelog: leia — liste o que será deployado 6. Dependências: — alerte sobre deps com CVEs conhecidos Gere um relatório GO/NO-GO com justificativa clara.",
+    "url": "/claude-code/arquivos/skills/deploy-check",
+    "tags": []
+  },
+  {
+    "id": "claude-code/arquivos/skills/review-pr#review-pr",
+    "title": "review-pr",
+    "section": "review-pr",
+    "content": "Analise o Pull Request atual seguindo estas etapas: 1. Rode para ver todas as mudanças 2. Rode para contexto (título, descrição, labels) 3. Avalie: - Segurança: credenciais expostas, inputs não validados, SQL injection - Qualidade: DRY, SOLID, complexidade desnecessária - Testes: cobertura das mudanças, edge cases cobertos - Documentação: funções públicas documentadas 4. Gere um relatório estruturado: - 🔴 Bloqueadores (impedem merge) - 🟡 Avisos (devem ser corrigidos) - 🟢 Sugestões (nice-to-have) 5. Poste o review com",
+    "url": "/claude-code/arquivos/skills/review-pr",
+    "tags": []
+  },
+  {
+    "id": "claude-code/arquivos/skills/security-scan#security-scan",
+    "title": "security-scan",
+    "section": "security-scan",
+    "content": "Execute uma auditoria de segurança completa: 1. Dependências: ou — CVEs conhecidos 2. Segredos expostos: busque por , , , em arquivos de código (excluindo e testes) 3. SQL Injection: busque por queries com concatenação de string em vez de parâmetros 4. Variáveis de ambiente: verifique se há valores hardcoded que deveriam ser envs 5. Permissões de arquivo: — scripts world-writable 6. Headers de segurança: se for API web, verifique CORS, CSRF, rate limiting Classifique tudo em Crítico / Alto / Médio / Baixo com remediação recomendada.",
+    "url": "/claude-code/arquivos/skills/security-scan",
+    "tags": []
+  },
+  {
+    "id": "claude-code/arquivos/skills/test-coverage#test-coverage",
+    "title": "test-coverage",
+    "section": "test-coverage",
+    "content": "Analise a cobertura de testes do projeto: 1. Rode 2. Identifique módulos com cobertura abaixo de 80% 3. Para cada módulo crítico sem cobertura, liste: - Funções/classes não testadas - Casos de borda mais prováveis - Complexidade ciclomática estimada 4. Priorize por risco: lógica de negócio > utils > scripts 5. Gere um plano de ação ordenado por impacto Não escreva os testes — apenas o plano para @test-writer implementar.",
+    "url": "/claude-code/arquivos/skills/test-coverage",
+    "tags": []
+  },
+  {
+    "id": "conceitos/fundamentos#fundamentos",
+    "title": "fundamentos",
+    "section": "fundamentos",
+    "content": "🧠 Fundamentos: Engenharia de Desenvolvimento com IA ← Voltar ao Índice --- Este documento consolida os conceitos teóricos que embasam os dois guias práticos deste repositório. Leia antes de ir para os guias técnicos. ---",
+    "url": "/conceitos/fundamentos",
+    "tags": []
+  },
+  {
+    "id": "conceitos/fundamentos#1-o-mindset-shift-de-codificador-para-co",
+    "title": "fundamentos",
+    "section": "1. O Mindset Shift: De Codificador para Comandante",
+    "content": "O paradigma mudou. Escrever código linha a linha perdeu valor para os negócios se não vier acompanhado de documentação, arquitetura e testes — porque o código por si só é descartável. O engenheiro moderno: | Antes (Codificador) | Agora (Comandante) | |---|---| | 70% digitando código | 70% entendendo o problema | | 20% debugando | 20% definindo arquitetura e regras | | 10% documentando | 10% revisando o que a IA produziu | Você não escreve código. Você orquestra inteligência artificial para codificar — e valida o resultado com olho de engenheiro. ---",
+    "url": "/conceitos/fundamentos",
+    "tags": []
+  },
+  {
+    "id": "conceitos/fundamentos#2-os-3-níveis-de-desenvolvimento-com-ia",
+    "title": "fundamentos",
+    "section": "2. Os 3 Níveis de Desenvolvimento com IA",
+    "content": "Nível 1: Vibe Coding 🎲 O nível mais básico. Uso ad-hoc de prompts sem estrutura. ✅ Bom para: protótipos rápidos, exploração, aprendizado ❌ Problemas: sem guard rails, código inseguro, sem testes, sem padrão 💡 Exemplo: \"Faz um CRUD de usuários aí\" Nível 2: Agentic Development 🤖 Desenvolvimento orquestrado. Adiciona fricção proposital. ✅ Bom para: projetos reais com equipe ✅ Inclui: arquitetura em camadas, agentes especializados, hooks de segurança 💡 Exemplo: Agente architect analisa → agente dev implementa → agente reviewer valida Nível 3: Spec-Driven Development (SDD) 📋 O nível de maior rigor. Trazido da engenharia de software clássica. ✅ Bom para: produção, compliance, projetos críticos ✅ Inclui: PRDs escritos antes do código, specs detalhadas, loops de conformidade 💡 Exemplo: Humano escreve spec completa → IA implementa → IA testa contra spec → loop até 100% conforme Meta: Todo time deveria estar pelo menos no Nível 2. Times maduros no Nível 3. ---",
+    "url": "/conceitos/fundamentos",
+    "tags": []
+  },
+  {
+    "id": "conceitos/fundamentos#3-frota-de-subagentes-especializados-age",
+    "title": "fundamentos",
+    "section": "3. Frota de Subagentes Especializados (Agentic Fleets)",
+    "content": "Em vez de pedir para uma IA generalista resolver um projeto inteiro (onde ela perde contexto), a técnica exige: 1. Quebrar problemas complexos em pedaços mínimos (small bite chunks) 2. Criar múltiplos subagentes hiperespecializados 3. Rodar em paralelo sob comando do humano Por que funciona melhor: Cada agente tem contexto limitado = menos alucinação Ferramentas restritas por agente = mais seguro Paralelismo = velocidade exponencial Separação de concerns = responsabilidades claras ---",
+    "url": "/conceitos/fundamentos",
+    "tags": []
+  },
+  {
+    "id": "conceitos/fundamentos#4-o-humano-como-gatekeeper",
+    "title": "fundamentos",
+    "section": "4. O Humano como Gatekeeper",
+    "content": "O ser humano não escreve código, mas atua no gargalo da qualidade. É o guardião que: Entende os fundamentos para validar o que a IA produziu Faz e gerencia revisão dupla (inclusive usando IAs revisoras) Dá a aprovação final (Merge) garantindo segurança e excelência Regra de ouro: Se você não entende o que o código faz, não faça merge. O humano é a última barreira. ---",
+    "url": "/conceitos/fundamentos",
+    "tags": []
+  },
+  {
+    "id": "conceitos/fundamentos#5-isolamento-de-ambiente-dev-containers",
+    "title": "fundamentos",
+    "section": "5. Isolamento de Ambiente (Dev Containers)",
+    "content": "IAs autônomas podem executar comandos destrutivos: Apagar o banco de dados Vazar variáveis de ambiente (, ) Instalar pacotes maliciosos Fazer requests para servidores externos A regra: nunca rode o agente direto na máquina host. ---",
+    "url": "/conceitos/fundamentos",
+    "tags": []
+  },
+  {
+    "id": "conceitos/fundamentos#6-design-upfront-a-arquitetura-guia-a-ia",
+    "title": "fundamentos",
+    "section": "6. Design Upfront: A Arquitetura Guia a IA",
+    "content": "A IA não possui o histórico ou as necessidades de longo prazo do negócio para escolher a melhor tecnologia. O líder técnico deve: 1. Desenhar entidades e fluxos antes de qualquer código 2. Documentar escolhas tecnológicas e restrições 3. Escrever em arquivo (, , ) 4. A IA usa essa documentação como trilhos obrigatórios Regra: Escreva o README de arquitetura antes da primeira linha de código. ---",
+    "url": "/conceitos/fundamentos",
+    "tags": []
+  },
+  {
+    "id": "conceitos/fundamentos#7-tdd-como-guard-rail",
+    "title": "fundamentos",
+    "section": "7. TDD como Guard Rail",
+    "content": "O desenvolvimento começa pelas validações e contratos de dados, não pelo código funcional. Por que funciona com IA: Testes definem o contrato — a IA não pode divergir Se a IA alucinar, os testes quebram imediatamente Cobertura automática desde o início ---",
+    "url": "/conceitos/fundamentos",
+    "tags": []
+  },
+  {
+    "id": "conceitos/fundamentos#8-knowledge-bases-kbs-e-mcp",
+    "title": "fundamentos",
+    "section": "8. Knowledge Bases (KBs) e MCP",
+    "content": "Para evitar que a IA alucine, dê a ela o contexto da empresa. MCP (Model Context Protocol): Protocolo que conecta agentes de IA a fontes de dados externas em tempo real. O agente consulta a base vetorial e recebe contexto relevante antes de gerar código. ---",
+    "url": "/conceitos/fundamentos",
+    "tags": []
+  },
+  {
+    "id": "conceitos/fundamentos#9-segurança-com-dados-sintéticos",
+    "title": "fundamentos",
+    "section": "9. Segurança com Dados Sintéticos",
+    "content": "Para compliance e segurança, IAs não devem acessar bancos de produção. A solução: dados sintéticos — informações falsas que mantêm os mesmos padrões e relações do banco real. | Dado Real | Dado Sintético | |---|---| | CPF: 123.456.789-00 | CPF: 987.654.321-99 (válido mas falso) | | Email: joao@empresa.com | Email: teste42@mock.dev | | Saldo: R$ 15.432,00 | Saldo: R$ 8.721,50 | Mesma estrutura, mesmas relações, zero risco de vazamento. Use a própria IA para gerar os dados sintéticos com: Mesmo schema Mesma distribuição estatística Mesmas foreign keys e constraints Zero dados pessoais reais ---",
+    "url": "/conceitos/fundamentos",
+    "tags": []
+  },
+  {
+    "id": "conceitos/fundamentos#10-infraestrutura-como-código-iac",
+    "title": "fundamentos",
+    "section": "10. Infraestrutura como Código (IaC)",
+    "content": "O deploy também entra na orquestração da IA. Peça para a IA: 1. Gerar o mapeamento em Terraform (ou Pulumi, CDK) 2. Precificar a infraestrutura antecipadamente 3. Gerar scripts de subir e destruir ambientes 4. Tudo versionado no Git como qualquer outro código ---",
+    "url": "/conceitos/fundamentos",
+    "tags": []
+  },
+  {
+    "id": "conceitos/fundamentos#11-desacoplamento-de-interface-ux",
+    "title": "fundamentos",
+    "section": "11. Desacoplamento de Interface (UX)",
+    "content": "Separe estritamente a lógica de dados/back-end da interface gráfica. IAs textuais geram interfaces genéricas e engessadas. Separe a engenharia da experiência visual. ---",
+    "url": "/conceitos/fundamentos",
+    "tags": []
+  },
+  {
+    "id": "conceitos/fundamentos#12-auditoria-de-segurança",
+    "title": "fundamentos",
+    "section": "12. Auditoria de Segurança",
+    "content": "Código de IA pode carregar más práticas da internet: Senhas em texto puro Algoritmos de criptografia defasados / escondidos Dependências com CVEs conhecidos Solução: Etapas dedicadas onde IAs auditoras (como o agente ) procuram ativamente por vulnerabilidades no código gerado. ---",
+    "url": "/conceitos/fundamentos",
+    "tags": []
+  },
+  {
+    "id": "conceitos/fundamentos#resumo-os-12-pilares",
+    "title": "fundamentos",
+    "section": "Resumo: Os 12 Pilares",
+    "content": "| # | Pilar | Resumo | |---|---|---| | 1 | Mindset Shift | Comandante, não codificador | | 2 | 3 Níveis | Vibe Coding → Agentic → SDD | | 3 | Agentic Fleets | Agentes especializados em paralelo | | 4 | Humano Gatekeeper | Valida, não digita | | 5 | Isolamento | Dev Containers obrigatórios | | 6 | Design Upfront | Arquitetura antes do código | | 7 | TDD Guard Rail | Testes antes da implementação | | 8 | KBs + MCP | Contexto da empresa para a IA | | 9 | Dados Sintéticos | Zero dados reais no dev | | 10 | IaC | Infraestrutura versionada | | 11 | Desacoplamento UX | API first, interface depois | | 12 | Auditoria | Segurança ativa no código gerado | --- ← Voltar ao Índice",
+    "url": "/conceitos/fundamentos",
+    "tags": []
+  }
+]

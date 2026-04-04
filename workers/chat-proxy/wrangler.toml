@@ -1,0 +1,12 @@
+name = "vibe-codinho-proxy"
+main = "src/index.ts"
+compatibility_date = "2024-09-23"
+compatibility_flags = ["nodejs_compat"]
+
+[vars]
+# Domínio do GitHub Pages — só aceita requests deste origin
+# Troque pelo seu domínio real se for customizado
+ALLOWED_ORIGIN = "stolpe22.github.io"
+
+# OPENAI_API_KEY é um secret — nunca vai aqui no arquivo
+# Configure com: wrangler secret put OPENAI_API_KEY
